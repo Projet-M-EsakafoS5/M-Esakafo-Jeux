@@ -6,7 +6,7 @@
 radius = 21.0238
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ejpah"]
-size = Vector2(52, 21)
+size = Vector2(34, 22)
 
 [node name="Poubelle" type="Node2D"]
 
@@ -23,5 +23,5 @@ texture = ExtResource("1_wiqeb")
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(1, -0.5)
+position = Vector2(-1, -4)
 shape = SubResource("RectangleShape2D_ejpah")
