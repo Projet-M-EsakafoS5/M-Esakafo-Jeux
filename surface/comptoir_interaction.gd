@@ -1,5 +1,7 @@
 extends Area2D
 
+signal plat_pret(plat)
+
 var player_nearby = false  
 var ingredient_plats = []  # Liste des ingrédients nécessaires pour le plat sélectionné
 var plat_selectionne = null  
@@ -169,6 +171,9 @@ func commencer_cuisson():
 		plat_selectionne = null
 		temps_restant = 0
 		timer_cuisson = null
+		
+		# Émettre un signal avec le plat
+		plat_pret.emit(plat_cuit)
 
 
 # Fonction désactivée mais conservée pour référence

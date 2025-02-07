@@ -9,3 +9,9 @@ func _ready():
 func _on_body_entered(body):
 	if body is Goblin:  # Vérifie si le gobelin est à proximité
 		body.recuperer_plat_cuit(self)  # Appelle la fonction de ramassage
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body is Goblin:  # Vérifie si le gobelin est à proximité
+		body.recuperer_plat_cuit(self)  # Appelle la fonction de ramassage
+		print("a proxi")

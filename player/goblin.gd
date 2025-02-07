@@ -4,7 +4,7 @@ const MOTION_SPEED = 160 # Pixels/second.
 var food_info = null
 var last_direction = Vector2(1, 0)
 @onready var area_detector: Area2D = $Area2D  # L'Area2D du joueur pour détecter la poubelle
-
+@onready var comptoir = $"./comptoir_interaction"
 var can_drop_food: bool = false  # Indique si on peut jeter la nourriture
 var food_held: Node2D = null  # La nourriture que le joueur tient
 
@@ -12,7 +12,8 @@ func _ready():
 	# Connecte les signaux d'entrée et de sortie
 	area_detector.area_entered.connect(_on_area_entered)
 	area_detector.area_exited.connect(_on_area_exited)
-
+	if comptoir:
+		comptoir.plat_pret.connect(recuperer_plat_cuit)
 
 var anim_directions = {
 	"idle": [ # list of [animation name, horizontal flip]
@@ -81,6 +82,16 @@ func _on_area_exited(area: Area2D):
 	if area.name == "PoubelleArea":
 		can_drop_food = false
 		print("Loin de la poubelle, impossible de jeter la nourriture.")
+
+func recuperer_plat_cuit(plat):
+	if food_held == null:  # Vérifie s'il tient déjà un aliment
+		food_held = plat
+		plat.get_parent().remove_child(plat)
+		add_child(plat)
+		plat.position = Vector2(0, -40)  # Ajuste la position par rapport au gobelin
+		print("Plat récupéré :", plat.id_plat)
+	else:
+		print("Tu tiens déjà quelque chose !")
 
 
 func pick_food():
