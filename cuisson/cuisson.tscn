@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdk67r443lqs7"]
+
+[ext_resource type="Script" path="res://cuisson/cuisson.gd" id="1_46i4p"]
+
+[node name="Cuisson" type="Node2D"]
+script = ExtResource("1_46i4p")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 100.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(11.6, 6.52)
+
+[node name="Button" type="Button" parent="."]
+offset_left = 13.0
+offset_top = 8.0
+offset_right = 31.0
+offset_bottom = 39.0
+text = "X"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
