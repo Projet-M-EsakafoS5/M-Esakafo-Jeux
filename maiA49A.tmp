@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://bxva008y1wfej"]
+
+[ext_resource type="Script" path="res://plats/show_plat.gd" id="1_ffu0b"]
+[ext_resource type="PackedScene" uid="uid://ckpet2ipa06po" path="res://floor/tilemap.tscn" id="1_m27mp"]
+[ext_resource type="PackedScene" uid="uid://chpas3ywnwvp8" path="res://surface/surface.tscn" id="2_b5p0x"]
+[ext_resource type="PackedScene" uid="uid://bqpkxht3mx8l8" path="res://player/goblin.tscn" id="3_eag20"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_ffu0b")
+
+[node name="Tilemap" parent="." instance=ExtResource("1_m27mp")]
+position = Vector2(568, 332)
+scale = Vector2(2.04387, 2.04387)
+
+[node name="Surface" parent="." instance=ExtResource("2_b5p0x")]
+position = Vector2(772, 253)
+scale = Vector2(1.77708, 1.77708)
+
+[node name="Goblin" parent="." instance=ExtResource("3_eag20")]
+position = Vector2(578, 326)
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+[node name="PlatsContainer" type="GridContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
