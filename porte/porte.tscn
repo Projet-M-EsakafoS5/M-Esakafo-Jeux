@@ -1,8 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://df8rhf2w78kw0"]
+[gd_scene load_steps=4 format=3 uid="uid://df8rhf2w78kw0"]
 
 [ext_resource type="Texture2D" uid="uid://wy6a8c45b63c" path="res://assets/deco/Fichier 1porte.png" id="1_rph48"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rov4d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5l7ge"]
 
 [node name="Porte" type="Node2D"]
 
@@ -18,3 +20,11 @@ shape = SubResource("RectangleShape2D_rov4d")
 position = Vector2(-4.76837e-07, -58)
 scale = Vector2(0.428749, 0.428749)
 texture = ExtResource("1_rph48")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -11)
+rotation = -0.534786
+scale = Vector2(5.28, 1)
+shape = SubResource("RectangleShape2D_5l7ge")

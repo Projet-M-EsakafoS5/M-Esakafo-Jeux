@@ -25,10 +25,10 @@ theme_override_constants/h_separation = 100
 [node name="Poubelle" parent="." instance=ExtResource("3_q3pvd")]
 position = Vector2(848, 352)
 
+[node name="Porte" parent="." instance=ExtResource("6_at3vk")]
+position = Vector2(149, 287)
+
 [node name="Goblin" parent="." instance=ExtResource("3_eag20")]
 position = Vector2(578, 326)
 
 [node name="Recette" parent="." instance=ExtResource("4_jh34w")]
-
-[node name="Porte" parent="." instance=ExtResource("6_at3vk")]
-position = Vector2(182, 271)

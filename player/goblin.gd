@@ -67,10 +67,10 @@ func update_animation(anim_set):
 
 func _process(delta):
 	if Input.is_action_just_pressed("grab"):  # "space"
-		if food_held and can_drop_food:
-			drop_food()
 		if !food_held:
 			pick_food()
+		if food_held and can_drop_food:
+			drop_food()
 
 func _on_area_entered(area: Area2D):
 	if area.name == "PoubelleArea":  # Vérifie que c'est bien la poubelle
