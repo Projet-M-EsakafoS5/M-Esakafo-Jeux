@@ -1,6 +1,6 @@
-extends Node2D  # (ou StaticBody2D selon ton cas)
-var gobelin_present: Goblin = null  # Stocke le gobelin s'il est dans la zone
-var id_plat = null  # ID du plat cuisiné
+extends Node2D 
+var gobelin_present: Goblin = null
+var id_plat = null
 
 func _ready():
 	if id_plat != null:
@@ -9,12 +9,12 @@ func _ready():
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is Goblin:
-		gobelin_present = body  # Stocke le gobelin
+		gobelin_present = body
 		print("Gobelin à proximité")
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body is Goblin:
-		gobelin_present = null  # Supprime la référence si le gobelin part
+		gobelin_present = null 
 		print("Gobelin est parti")
 
 func _process(_delta):
