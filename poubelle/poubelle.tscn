@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://i0l0ytuubmmq"]
 
-[ext_resource type="Texture2D" uid="uid://de0n5vxlqn2ku" path="res://icon.svg" id="1_8pwnl"]
+[ext_resource type="Texture2D" uid="uid://p6rnugxdh3lw" path="res://poubelle/Fichier 2.png" id="1_wiqeb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ti33r"]
 radius = 21.0238
@@ -9,11 +9,10 @@ radius = 21.0238
 
 [node name="Area2D" type="Area2D" parent="."]
 
-[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
-position = Vector2(1, -19)
-scale = Vector2(0.28, 0.28)
-texture = ExtResource("1_8pwnl")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 scale = Vector2(1.28, 0.8)
 shape = SubResource("CircleShape2D_ti33r")
+
+[node name="Fichier2" type="Sprite2D" parent="."]
+position = Vector2(-18, -23)
+texture = ExtResource("1_wiqeb")
