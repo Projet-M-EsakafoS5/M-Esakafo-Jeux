@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://kxxibna1ghcp"]
+[gd_scene load_steps=4 format=3 uid="uid://kxxibna1ghcp"]
 
-[ext_resource type="Texture2D" uid="uid://xxmnx7rfexup" path="res://assets/bag/ato.png" id="1_vgato"]
+[ext_resource type="Script" path="res://plats/plat_finie.gd" id="1_guo36"]
+[ext_resource type="Texture2D" uid="uid://nsdi7vqv88qu" path="res://assets/bag/ato.png" id="1_vgato"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_skj6u"]
 size = Vector2(23, 21)
 
 [node name="PlatFinie" type="Node2D"]
+script = ExtResource("1_guo36")
 
 [node name="Area2D" type="Area2D" parent="."]
 

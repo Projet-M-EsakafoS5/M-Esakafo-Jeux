@@ -149,14 +149,27 @@ func commencer_cuisson():
 		temps_restant = Utiles.format_time(plat_selectionne["plat"].get("tempsCuisson", ""))
 		timer_cuisson = get_tree().create_timer(temps_restant)
 		print("Début de la cuisson de", plat_selectionne["plat"]["nom"])
+		
 		await timer_cuisson.timeout  # Attendre la fin du timer
 		
-		cuisson_manager.ajouter_plat_cuit(plat_selectionne["plat"]["id"])  # Ajouter le plat cuit à la liste
-		print("Plat cuit :", plat_selectionne["plat"]["nom"])
+		# Création du plat fini
+		var plat_cuit = load("res://plats/plat_finie.tscn").instantiate()
+		plat_cuit.id_plat = plat_selectionne["id"]  # Assigner l'ID du plat cuit
 		
+		# Placer le plat sur le feu
+		#var feu_position = $Feu_1.global_position  # Récupérer la position du feu
+		#plat_cuit.global_position = feu_position
+
+		# Ajouter la scène au parent (la cuisine ou la map)
+		get_parent().add_child(plat_cuit)
+		
+		print("Plat cuit :", plat_selectionne["plat"]["nom"], " placé sur le feu !")
+
+		# Réinitialisation des variables
 		plat_selectionne = null
 		temps_restant = 0
 		timer_cuisson = null
+
 
 # Fonction désactivée mais conservée pour référence
 # func _on_request_completed(result, response_code, headers, body):
