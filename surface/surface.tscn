@@ -1,0 +1,64 @@
+[gd_scene load_steps=8 format=3 uid="uid://chpas3ywnwvp8"]
+
+[ext_resource type="Texture2D" uid="uid://04tqdcojydxx" path="res://surface/isometric kitchen furniture png.png" id="1_mrybl"]
+[ext_resource type="Script" path="res://surface/comptoir_interaction.gd" id="2_bdcvo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7hx0e"]
+size = Vector2(74, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x30na"]
+atlas = ExtResource("1_mrybl")
+region = Rect2(450, 480, 75, 60)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vdiha"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x30na")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j76sa"]
+size = Vector2(129.139, 21.9703)
+
+[sub_resource type="LabelSettings" id="LabelSettings_0cfj8"]
+font_size = 8
+font_color = Color(0, 0, 0, 1)
+
+[node name="Surface" type="Node2D" groups=["surface"]]
+
+[node name="comptoir_interaction" type="Area2D" parent="." groups=["surface"]]
+script = ExtResource("2_bdcvo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="comptoir_interaction" groups=["surface"]]
+position = Vector2(-10, 15)
+rotation = 0.479424
+scale = Vector2(0.430741, 1)
+shape = SubResource("RectangleShape2D_7hx0e")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="StaticBody2D"]
+sprite_frames = SubResource("SpriteFrames_vdiha")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1.17294, -1.93789)
+rotation = -2.65466
+scale = Vector2(0.349833, 1.63036)
+shape = SubResource("RectangleShape2D_j76sa")
+
+[node name="etat de cuisson" type="Label" parent="StaticBody2D"]
+offset_left = -84.0
+offset_top = -51.0
+offset_right = 83.0
+offset_bottom = -28.0
+label_settings = SubResource("LabelSettings_0cfj8")
+horizontal_alignment = 1
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[connection signal="body_entered" from="comptoir_interaction" to="comptoir_interaction" method="_on_body_entered"]
+[connection signal="body_exited" from="comptoir_interaction" to="comptoir_interaction" method="_on_body_exited"]
