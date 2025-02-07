@@ -20,5 +20,5 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 func _process(_delta):
 	if gobelin_present and Input.is_action_just_pressed("grab"):
 		gobelin_present.recuperer_plat_cuit(self)
-		print("Le gobelin a récupéré le plat")
+		print("Le gobelin a récupéré la commande numero ", id_plat)
 		#queue_free()  # Supprime le plat après récupération
