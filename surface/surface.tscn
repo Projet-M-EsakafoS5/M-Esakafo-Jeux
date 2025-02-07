@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://chpas3ywnwvp8"]
+[gd_scene load_steps=7 format=3 uid="uid://chpas3ywnwvp8"]
 
+[ext_resource type="Script" path="res://surface/surface.gd" id="1_g2ujm"]
 [ext_resource type="Texture2D" uid="uid://cmhvl0amtgvlc" path="res://surface/Fichier 1.png" id="2_1tkn8"]
 [ext_resource type="Script" path="res://surface/comptoir_interaction.gd" id="2_bdcvo"]
 
@@ -14,6 +15,7 @@ font_size = 8
 font_color = Color(0, 0, 0, 1)
 
 [node name="Surface" type="Node2D" groups=["surface"]]
+script = ExtResource("1_g2ujm")
 
 [node name="comptoir_interaction" type="Area2D" parent="." groups=["surface"]]
 script = ExtResource("2_bdcvo")

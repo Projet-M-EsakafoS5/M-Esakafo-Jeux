@@ -6,7 +6,7 @@ var plat_selectionne = null
 var cuisson = preload("res://cuisson/cuisson.tscn")  
 const API_URL = "https://m-esakafo-1.onrender.com/api/commandes/attente"  
 const PlatScene = preload("res://plats/plat.tscn")  
-
+var ingredient_trouve = null
 @onready var temps = $"../StaticBody2D/etat de cuisson"
 @onready var goblin = get_node("/root/Main/Goblin")
 @onready var recettes = get_node("/root/Main/Recette")  
@@ -70,7 +70,7 @@ func selectionner_plat():
 			continue  # Ignore les plats déjà cuits
 
 		plat_selectionne = plat
-		print("Plat sélectionné :", plat_selectionne["plat"]["nom"])
+		print("Plat sélectionné :", plat_selectionne["id"])
 
 		# Récupérer les ingrédients nécessaires pour ce plat
 		ingredient_plats.clear()
@@ -122,8 +122,6 @@ func verifier_ingredient_ajoute(ingredient_info):
 	if plat_selectionne == null:
 		print("Aucun plat sélectionné pour la cuisson.")
 		return
-
-	var ingredient_trouve = null
 
 	# Vérifier si l'ingrédient est dans la recette du plat
 	var index = 0

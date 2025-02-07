@@ -68,7 +68,7 @@ func _process(delta):
 	if Input.is_action_just_pressed("grab"):  # "space"
 		if food_held and can_drop_food:
 			drop_food()
-		else:
+		if !food_held:
 			pick_food()
 
 func _on_area_entered(area: Area2D):
