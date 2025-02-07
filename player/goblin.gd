@@ -1,9 +1,18 @@
 class_name Goblin extends CharacterBody2D
 
 const MOTION_SPEED = 160 # Pixels/second.
-var food_held = null  # Stocke l'objet ramassé
 var food_info = null
 var last_direction = Vector2(1, 0)
+@onready var area_detector: Area2D = $Area2D  # L'Area2D du joueur pour détecter la poubelle
+
+var can_drop_food: bool = false  # Indique si on peut jeter la nourriture
+var food_held: Node2D = null  # La nourriture que le joueur tient
+
+func _ready():
+	# Connecte les signaux d'entrée et de sortie
+	area_detector.area_entered.connect(_on_area_entered)
+	area_detector.area_exited.connect(_on_area_exited)
+
 
 var anim_directions = {
 	"idle": [ # list of [animation name, horizontal flip]
@@ -57,10 +66,21 @@ func update_animation(anim_set):
 
 func _process(delta):
 	if Input.is_action_just_pressed("grab"):  # "space"
-		if food_held:
+		if food_held and can_drop_food:
 			drop_food()
 		else:
 			pick_food()
+
+func _on_area_entered(area: Area2D):
+	if area.name == "PoubelleArea":  # Vérifie que c'est bien la poubelle
+		can_drop_food = true
+		print("Proche de la poubelle, tu peux jeter la nourriture !")
+
+# Quand le joueur sort de la zone de la poubelle
+func _on_area_exited(area: Area2D):
+	if area.name == "PoubelleArea":
+		can_drop_food = false
+		print("Loin de la poubelle, impossible de jeter la nourriture.")
 
 
 func pick_food():

@@ -8,7 +8,7 @@ const API_URL = "https://m-esakafo-1.onrender.com/api/commandes/attente"
 const PlatScene = preload("res://plats/plat.tscn")  
 
 @onready var temps = $"../StaticBody2D/etat de cuisson"
-@onready var goblin = get_node("/root/Main/Goblin")  
+@onready var goblin = get_node("/root/Main/Goblin")
 @onready var recettes = get_node("/root/Main/Recette")  
 @onready var http_request = HTTPRequest.new()  
 @onready var refresh_timer = Timer.new()  

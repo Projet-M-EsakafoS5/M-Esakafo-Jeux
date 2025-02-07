@@ -7,7 +7,7 @@
 size = Vector2(88.2443, 19.9389)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j76sa"]
-size = Vector2(153.217, 21.9703)
+size = Vector2(150.695, 21.4791)
 
 [sub_resource type="LabelSettings" id="LabelSettings_0cfj8"]
 font_size = 8
@@ -32,7 +32,7 @@ scale = Vector2(0.28, 0.28)
 texture = ExtResource("2_1tkn8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(-3, -7)
+position = Vector2(-2.41778, -7.12602)
 rotation = -2.61754
 scale = Vector2(0.349833, 1.63036)
 shape = SubResource("RectangleShape2D_j76sa")
