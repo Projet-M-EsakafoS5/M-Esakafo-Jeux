@@ -1,0 +1,52 @@
+[gd_scene load_steps=4 format=3 uid="uid://c5omv818tk58f"]
+
+[ext_resource type="Script" path="res://plats/plat.gd" id="1_3h6l8"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_is40m"]
+line_spacing = 0.0
+font_size = 9
+
+[sub_resource type="LabelSettings" id="LabelSettings_n1xld"]
+font_size = 14
+
+[node name="plat" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_3h6l8")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_right = 74.0
+offset_bottom = 91.0
+color = Color(0.361139, 8.91622e-05, 0.361401, 1)
+
+[node name="nom_plat" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 62.0
+offset_right = 78.0
+offset_bottom = 88.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 10
+text = "lolo dsjcsncsdk fssdsv"
+label_settings = SubResource("LabelSettings_is40m")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="image" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 5.0
+offset_right = 91.0
+offset_bottom = 82.0
+scale = Vector2(0.671329, 0.662934)
+
+[node name="temps" type="Label" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_right = 59.0
+offset_bottom = 23.0
+text = "00"
+label_settings = SubResource("LabelSettings_n1xld")
+autowrap_mode = 2
