@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dchs2uwdxl4ce"]
+
+[ext_resource type="Script" path="res://ingredient/ingredient.gd" id="1_isbbk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gtqer"]
+size = Vector2(123, 45)
+
+[node name="Ingredient" type="Node2D" groups=["ingredient"]]
+
+[node name="Area2D" type="Area2D" parent="." groups=["ingredient"]]
+script = ExtResource("1_isbbk")
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["ingredient"]]
+visible = false
+position = Vector2(56.5, 23.5)
+shape = SubResource("RectangleShape2D_gtqer")
