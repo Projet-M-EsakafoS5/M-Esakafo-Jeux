@@ -4,13 +4,14 @@ signal plat_pret(plat)
 signal commande_selectionne(plat)
 @onready var ingredients_container = get_node("/root/Main/CanvasLayer/IngredientsContainer")
 var player_nearby = false  
+@onready var hbox = $"../HBoxContainer"
 var ingredient_plats = []  # Liste des ingrédients nécessaires pour le plat sélectionné
 var liste_commande = []  # Liste des commandes
 @onready var command_list = get_node("/root/Main/CanvasLayer/plat/PlatsContainer")
 var plat_selectionne = null  
 var cuisson = preload("res://cuisson/cuisson.tscn")  
-const API_URL = "https://m-esakafo-1.onrender.com/api/commandes/attente"  
-const PlatScene = preload("res://plats/plat.tscn")  
+const API_URL = "https://m-esakafo-1.onrender.com/api/commandes/attente" 
+const PlatScene = preload("res://plats/plat.tscn") 
 var ingredient_trouve = null
 @onready var temps = $"../StaticBody2D/etat de cuisson"
 @onready var goblin = get_node("/root/Main/Goblin")
@@ -119,7 +120,7 @@ func selectionner_plat():
 		return
 
 	for plat in cuisson_manager.plats_a_preparer:
-		var hbox = $"../HBoxContainer"
+		
 		var plat_id = int(plat["plat"]["id"])
 		var bouton_plat = Button.new()
 		bouton_plat.text = "Recette "+plat["plat"]["nom"]
@@ -159,9 +160,9 @@ func _on_request_completed(_result, response_code, _headers, body):
 			for plat in data:
 				var id_plat = int(plat["plat"]["id"])
 				ajouter_plats_a_preparer(nouveaux_plats, plat)
-				update_commande_status(plat["id"], 1)
-				http_request.request(API_URL)
-			afficher_commandes(liste_commande)
+				#update_commande_status(plat["id"], 1)
+				#http_request.request(API_URL)
+			afficher_commandes(data)
 
 func update_commande_status(plat_id, statut):
 	var url = "https://m-esakafo-1.onrender.com/api/commandes/%s/statut" % str(plat_id)  # Remplace le 1 par l'ID du plat
@@ -256,6 +257,10 @@ func commencer_cuisson():
 		# Émettre un signal avec le plat
 		plat_pret.emit(plat_cuit)
 		http_request.request(API_URL)
+		for node in ingredients_container.get_children():
+			node.queue_free()
+			
+		hbox.queue_free()
 
 
 # Fonction désactivée mais conservée pour référence
