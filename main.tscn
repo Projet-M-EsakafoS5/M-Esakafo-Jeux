@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://bxva008y1wfej"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_ao518"]
-[ext_resource type="PackedScene" uid="uid://ckpet2ipa06po" path="res://floor/tilemap.tscn" id="1_m27mp"]
+[ext_resource type="PackedScene" uid="uid://bt1ce5n6gqh8t" path="res://environnement/trano.tscn" id="2_nsfbb"]
 [ext_resource type="PackedScene" uid="uid://bqpkxht3mx8l8" path="res://player/goblin.tscn" id="3_eag20"]
 [ext_resource type="PackedScene" uid="uid://i0l0ytuubmmq" path="res://poubelle/poubelle.tscn" id="3_q3pvd"]
 [ext_resource type="PackedScene" uid="uid://bjemmyyxp2a3d" path="res://recettes/recette.tscn" id="4_jh34w"]
@@ -13,18 +13,20 @@ layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_ao518")
 
-[node name="Tilemap" parent="." instance=ExtResource("1_m27mp")]
-position = Vector2(568, 332)
-scale = Vector2(2.04387, 2.04387)
+[node name="Plancher" parent="." instance=ExtResource("2_nsfbb")]
+position = Vector2(-316, -129)
+scale = Vector2(1.6, 1.6)
 
 [node name="Poubelle" parent="." instance=ExtResource("3_q3pvd")]
 position = Vector2(847, 349)
 
 [node name="Porte" parent="." instance=ExtResource("6_at3vk")]
-position = Vector2(149, 287)
+position = Vector2(72, 393)
+scale = Vector2(1.29335, 1.29335)
 
 [node name="Goblin" parent="." instance=ExtResource("3_eag20")]
-position = Vector2(578, 326)
+position = Vector2(578, 330)
+scale = Vector2(1.48, 1.48)
 
 [node name="Recette" parent="." instance=ExtResource("4_jh34w")]
 

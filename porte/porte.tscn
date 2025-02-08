@@ -1,11 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://df8rhf2w78kw0"]
+[gd_scene load_steps=4 format=3 uid="uid://df8rhf2w78kw0"]
 
 [ext_resource type="Script" path="res://porte/porte.gd" id="1_1ls7j"]
-[ext_resource type="Texture2D" uid="uid://wy6a8c45b63c" path="res://assets/deco/Fichier 1porte.png" id="1_rph48"]
+[ext_resource type="Texture2D" uid="uid://dhjqdi5xcvl02" path="res://assets/environnement/porte.png" id="2_4oxqn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rov4d"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5l7ge"]
+size = Vector2(24.5802, 17.3763)
 
 [node name="Porte" type="Node2D"]
 script = ExtResource("1_1ls7j")
@@ -13,20 +12,12 @@ script = ExtResource("1_1ls7j")
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(16, 21)
+position = Vector2(12.9016, 18.8136)
 rotation = -0.536729
 scale = Vector2(5.04, 2.64)
 shape = SubResource("RectangleShape2D_rov4d")
 
-[node name="Fichier1Porte" type="Sprite2D" parent="Area2D"]
-position = Vector2(-4.76837e-07, -58)
-scale = Vector2(0.428749, 0.428749)
-texture = ExtResource("1_rph48")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(0, -11)
-rotation = -0.534786
-scale = Vector2(5.28, 1)
-shape = SubResource("RectangleShape2D_5l7ge")
+[node name="Porte" type="Sprite2D" parent="Area2D"]
+position = Vector2(3.00003, -64)
+scale = Vector2(1.44, 1.44)
+texture = ExtResource("2_4oxqn")

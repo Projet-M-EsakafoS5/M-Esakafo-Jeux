@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3 uid="uid://bt1ce5n6gqh8t"]
+
+[ext_resource type="Texture2D" uid="uid://chloj7c6oq6hu" path="res://assets/environnement/Sol.png" id="1_5np8t"]
+[ext_resource type="Texture2D" uid="uid://rvax4c3j2owg" path="res://assets/environnement/fenetreVert.png" id="2_153bi"]
+[ext_resource type="Texture2D" uid="uid://bi1oroa8njn6s" path="res://assets/environnement/Murboi.png" id="3_xr1xp"]
+[ext_resource type="Texture2D" uid="uid://biq3ddft20qtx" path="res://assets/environnement/Murboi3.png" id="4_mkgm7"]
+[ext_resource type="Texture2D" uid="uid://m5n6sm5xw5ll" path="res://assets/environnement/MurBlanc.png" id="5_igv3x"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_v100m"]
+normal = Vector2(0.501036, 0.865426)
+distance = 14.1561
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_iauak"]
+normal = Vector2(-0.498471, 0.866906)
+distance = 2.0
+
+[node name="Plancher" type="Node2D"]
+
+[node name="Sol" type="Sprite2D" parent="."]
+position = Vector2(559, 355)
+texture = ExtResource("1_5np8t")
+
+[node name="FenetreVert" type="Sprite2D" parent="."]
+position = Vector2(482, 109)
+texture = ExtResource("2_153bi")
+
+[node name="Murboi" type="Sprite2D" parent="."]
+position = Vector2(479, 123)
+texture = ExtResource("3_xr1xp")
+
+[node name="Murboi3" type="Sprite2D" parent="."]
+position = Vector2(281, 236)
+texture = ExtResource("4_mkgm7")
+
+[node name="Murboi2" type="Sprite2D" parent="."]
+position = Vector2(276, 240)
+texture = ExtResource("3_xr1xp")
+
+[node name="MurBlanc" type="Sprite2D" parent="."]
+position = Vector2(671, 117)
+texture = ExtResource("5_igv3x")
+
+[node name="MurBlanc2" type="Sprite2D" parent="."]
+position = Vector2(852, 221)
+texture = ExtResource("5_igv3x")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(402, 218)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("WorldBoundaryShape2D_v100m")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(340, 4)
+shape = SubResource("WorldBoundaryShape2D_iauak")

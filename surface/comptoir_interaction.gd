@@ -19,6 +19,7 @@ var ingredient_trouve = null
 @onready var http_request = HTTPRequest.new()  
 @onready var refresh_timer = Timer.new()  
 @onready var cuisson_manager = get_node("/root/CuissonManager")  
+var bouton_plat = Button.new()
 
 var timer_cuisson = null  
 var temps_restant = 0.0 
@@ -58,7 +59,7 @@ func _process(delta):
 
 	if timer_cuisson and temps_restant > 0:
 		temps_restant -= delta
-		temps.text = "Temps restant : %.1f s" % temps_restant
+		bouton_plat.text = "Temps restant : %.1f s" % temps_restant
 
 
 func afficher_commandes(data):
@@ -122,7 +123,6 @@ func selectionner_plat():
 	for plat in cuisson_manager.plats_a_preparer:
 		
 		var plat_id = int(plat["plat"]["id"])
-		var bouton_plat = Button.new()
 		bouton_plat.text = "Recette "+plat["plat"]["nom"]
 		bouton_plat.connect("pressed", Callable(self, "_on_commande_selectionne").bind(plat))
 		hbox.add_child(bouton_plat)
