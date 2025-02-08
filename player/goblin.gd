@@ -170,4 +170,5 @@ func drop_food():
 		food_held.queue_free()
 		food_held = null
 		food_info = null
+		can_drop_food = false
 		print("Nourriture lâchée !")

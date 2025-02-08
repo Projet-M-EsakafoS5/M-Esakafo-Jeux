@@ -153,12 +153,13 @@ func verifier_ingredient_ajoute(ingredient_info):
 		print("Ingrédient ajouté :", ingredient_trouve["ingredient"]["nom"])
 		ingredient_plats.remove_at(index)  # Retirer l'ingrédient de la liste
 		print("Ingrédients restants :", ingredient_plats)
-
+		goblin.can_drop_food = true
 		# Si tous les ingrédients sont réunis, lancer la cuisson
 		if ingredient_plats.size() == 0:
 			commencer_cuisson()
 	else:
 		print("ingredient invalide, veillez le jeter")
+		goblin.can_drop_food = false
 
 # Débute la cuisson lorsque tous les ingrédients sont réunis
 func commencer_cuisson():
