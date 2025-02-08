@@ -4,6 +4,8 @@ signal plat_pret(plat)
 
 var player_nearby = false  
 var ingredient_plats = []  # Liste des ingrédients nécessaires pour le plat sélectionné
+var liste_commande = []  # Liste des commandes
+@onready var command_list = get_node("/root/Main/plat/PlatsContainer")
 var plat_selectionne = null  
 var cuisson = preload("res://cuisson/cuisson.tscn")  
 const API_URL = "https://m-esakafo-1.onrender.com/api/commandes/attente"  
@@ -54,6 +56,35 @@ func _process(delta):
 		temps_restant -= delta
 		temps.text = "Temps restant : %.1f s" % temps_restant
 
+func afficher_commandes(data):
+	# Nettoyer les commandes précédentes
+	for child in command_list.get_children():
+		child.queue_free()
+
+	for commande in data:
+		var plat_nom = commande["plat"]["nom"]
+		var quantite = commande["quantite"]
+		var ticket = commande["numeroTicket"]
+		var statut = commande["statut"]
+		var sprite_path = "res://images/" + commande["plat"]["sprite"]  # Assure-toi que les images sont bien stockées
+		print(commande["plat"]["nom"])
+		# Créer un nouveau conteneur pour afficher la commande
+		var commande_ui = HBoxContainer.new()
+
+		# Ajouter une image
+		var image = TextureRect.new()
+		image.texture = load(sprite_path) if ResourceLoader.exists(sprite_path) else null
+		image.custom_minimum_size = Vector2(64, 64)  # Ajuste selon besoin
+		commande_ui.add_child(image)
+
+		# Ajouter le texte de la commande
+		var label = Label.new()
+		label.text = "%s (x%d) - Ticket: %s - Statut: %d" % [plat_nom, quantite, ticket, statut]
+		commande_ui.add_child(label)
+
+		# Ajouter la commande à la liste
+		command_list.add_child(commande_ui)
+
 # Sélectionne un plat à cuire
 func selectionner_plat():
 	if cuisson_manager.plats_a_preparer.size() == 0:
@@ -91,7 +122,7 @@ func _on_request_completed(_result, response_code, _headers, body):
 		var json = JSON.new()
 		var parse_result = json.parse(body.get_string_from_utf8())
 		var data = json.get_data()
-
+		liste_commande = data
 		if parse_result == OK and typeof(data) == TYPE_ARRAY:
 			var nouveaux_plats = []
 
@@ -99,7 +130,8 @@ func _on_request_completed(_result, response_code, _headers, body):
 			for plat in data:
 				var id_plat = int(plat["plat"]["id"])
 				ajouter_plats_a_preparer(nouveaux_plats, plat)
-				update_commande_status(plat["id"], 1)
+				#update_commande_status(plat["id"], 1)
+			afficher_commandes(data)
 
 func update_commande_status(plat_id, statut):
 	var url = "https://m-esakafo-1.onrender.com/api/commandes/%s/statut" % str(plat_id)  # Remplace le 1 par l'ID du plat

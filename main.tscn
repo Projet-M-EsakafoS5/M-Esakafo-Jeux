@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bxva008y1wfej"]
+[gd_scene load_steps=8 format=3 uid="uid://bxva008y1wfej"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_ao518"]
 [ext_resource type="PackedScene" uid="uid://ckpet2ipa06po" path="res://floor/tilemap.tscn" id="1_m27mp"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://i0l0ytuubmmq" path="res://poubelle/poubelle.tscn" id="3_q3pvd"]
 [ext_resource type="PackedScene" uid="uid://bjemmyyxp2a3d" path="res://recettes/recette.tscn" id="4_jh34w"]
 [ext_resource type="PackedScene" uid="uid://df8rhf2w78kw0" path="res://porte/porte.tscn" id="6_at3vk"]
+[ext_resource type="PackedScene" uid="uid://c5omv818tk58f" path="res://plats/plat.tscn" id="7_pqvyr"]
 
 [node name="Main" type="Control" groups=["main"]]
 layout_mode = 3
@@ -16,14 +17,8 @@ script = ExtResource("1_ao518")
 position = Vector2(568, 332)
 scale = Vector2(2.04387, 2.04387)
 
-[node name="PlatsContainer" type="GridContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-theme_override_constants/h_separation = 100
-
 [node name="Poubelle" parent="." instance=ExtResource("3_q3pvd")]
-position = Vector2(848, 352)
+position = Vector2(847, 349)
 
 [node name="Porte" parent="." instance=ExtResource("6_at3vk")]
 position = Vector2(149, 287)
@@ -32,3 +27,5 @@ position = Vector2(149, 287)
 position = Vector2(578, 326)
 
 [node name="Recette" parent="." instance=ExtResource("4_jh34w")]
+
+[node name="plat" parent="." instance=ExtResource("7_pqvyr")]
