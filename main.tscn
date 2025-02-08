@@ -28,4 +28,10 @@ position = Vector2(578, 326)
 
 [node name="Recette" parent="." instance=ExtResource("4_jh34w")]
 
-[node name="plat" parent="." instance=ExtResource("7_pqvyr")]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="plat" parent="CanvasLayer" instance=ExtResource("7_pqvyr")]
+
+[node name="IngredientsContainer" type="VBoxContainer" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0

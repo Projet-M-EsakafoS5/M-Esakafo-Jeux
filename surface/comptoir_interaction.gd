@@ -1,11 +1,12 @@
 extends Area2D
 
 signal plat_pret(plat)
-
+signal commande_selectionne(plat)
+@onready var ingredients_container = get_node("/root/Main/CanvasLayer/IngredientsContainer")
 var player_nearby = false  
 var ingredient_plats = []  # Liste des ingrédients nécessaires pour le plat sélectionné
 var liste_commande = []  # Liste des commandes
-@onready var command_list = get_node("/root/Main/plat/PlatsContainer")
+@onready var command_list = get_node("/root/Main/CanvasLayer/plat/PlatsContainer")
 var plat_selectionne = null  
 var cuisson = preload("res://cuisson/cuisson.tscn")  
 const API_URL = "https://m-esakafo-1.onrender.com/api/commandes/attente"  
@@ -73,9 +74,11 @@ func afficher_commandes(data):
 
 		# Ajouter une image
 		var image = TextureRect.new()
+		var camera = Camera2D.new()
 		image.texture = load(sprite_path) if ResourceLoader.exists(sprite_path) else null
 		image.custom_minimum_size = Vector2(64, 64)  # Ajuste selon besoin
 		commande_ui.add_child(image)
+		commande_ui.add_child(camera)
 
 		# Ajouter le texte de la commande
 		var label = Label.new()
@@ -84,6 +87,22 @@ func afficher_commandes(data):
 
 		# Ajouter la commande à la liste
 		command_list.add_child(commande_ui)
+
+func _on_commande_selectionne(plat):
+	 #Vider l'affichage actuel
+	for node in ingredients_container.get_children():
+		node.queue_free()
+	
+	print("Plat sélectionné :", plat["plat"]["nom"])
+	
+	# Afficher les ingrédients de la recette
+	for ingredient in recettes.recette_recup:
+		if ingredient["plat"]["id"] == plat["plat"]["id"]:
+			var label = Label.new()
+			label.text = ingredient["ingredient"]["nom"]
+			label.autowrap_mode = TextServer.AUTOWRAP_WORD
+			ingredients_container.add_child(label)
+
 
 # Sélectionne un plat à cuire
 func selectionner_plat():
@@ -96,8 +115,13 @@ func selectionner_plat():
 		return
 
 	for plat in cuisson_manager.plats_a_preparer:
+		
 		var plat_id = int(plat["plat"]["id"])
-
+		var bouton_plat = Button.new()
+		bouton_plat.text = plat["plat"]["nom"]
+		bouton_plat.connect("pressed", Callable(self, "_on_commande_selectionne").bind(plat))
+		add_child(bouton_plat)
+		
 		if cuisson_manager.est_plat_cuit(plat_id):
 			print("Plat déjà cuit :", plat["plat"]["nom"])
 			continue  # Ignore les plats déjà cuits
@@ -130,7 +154,7 @@ func _on_request_completed(_result, response_code, _headers, body):
 			for plat in data:
 				var id_plat = int(plat["plat"]["id"])
 				ajouter_plats_a_preparer(nouveaux_plats, plat)
-				#update_commande_status(plat["id"], 1)
+				update_commande_status(plat["id"], 1)
 			afficher_commandes(data)
 
 func update_commande_status(plat_id, statut):
