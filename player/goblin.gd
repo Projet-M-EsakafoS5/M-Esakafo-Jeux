@@ -7,6 +7,7 @@ var last_direction = Vector2(1, 0)
 @onready var comptoir = $"./comptoir_interaction"
 var can_drop_food: bool = false  # Indique si on peut jeter la nourriture
 var food_held: Node2D = null  # La nourriture que le joueur tient
+var utiles = Utiles.new()
 
 func _ready():
 	# Connecte les signaux d'entrée et de sortie
@@ -83,7 +84,6 @@ func _on_area_entered(area: Area2D):
 		if food_held and "id_plat" in food_held:
 			var plat_id = food_held.id_plat
 			var statut = "livré"  # Ou un autre statut selon ton besoin
-
 			# Mise à jour de l'API avec le nouvel état
 			update_commande_status(plat_id, 3)
 
@@ -101,7 +101,7 @@ func _on_request_completed(result, response_code, headers, body):
 		print("Échec de la mise à jour. Code :", response_code, " Réponse :", body.get_string_from_utf8())
 
 func update_commande_status(plat_id, statut):
-	var url = "https://m-esakafo-1.onrender.com/api/commandes/%s/statut" % plat_id  # Remplace le 1 par l'ID du plat
+	var url = "https://m-esakafo-1.onrender.com/api/commandes/%s/statut" % str(plat_id)  # Remplace le 1 par l'ID du plat
 	var http_request = HTTPRequest.new()
 	add_child(http_request)  # Ajoute le HTTPRequest comme enfant
 
@@ -110,10 +110,10 @@ func update_commande_status(plat_id, statut):
 	var headers = ["Content-Type: application/json"]
 	var data = JSON.stringify({"statut": statut})  # Convertit les données en JSON
 
-	var error = http_request.request(url, headers, HTTPClient.METHOD_PATCH, data)
+	var error = http_request.request(url, headers, HTTPClient.METHOD_PUT, data)
+
 	if error != OK:
 		print("Erreur lors de la requête PATCH :", error)
-
 
 # Quand le joueur sort de la zone de la poubelle
 func _on_area_exited(area: Area2D):

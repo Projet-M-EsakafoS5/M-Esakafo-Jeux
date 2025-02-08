@@ -99,7 +99,23 @@ func _on_request_completed(_result, response_code, _headers, body):
 			for plat in data:
 				var id_plat = int(plat["plat"]["id"])
 				ajouter_plats_a_preparer(nouveaux_plats, plat)
+				update_commande_status(plat["id"], 1)
 
+func update_commande_status(plat_id, statut):
+	var url = "https://m-esakafo-1.onrender.com/api/commandes/%s/statut" % str(plat_id)  # Remplace le 1 par l'ID du plat
+	var http_request = HTTPRequest.new()
+	add_child(http_request)  # Ajoute le HTTPRequest comme enfant
+
+	http_request.request_completed.connect(_on_request_completed)  # Connecte le signal pour récupérer la réponse
+
+	var headers = ["Content-Type: application/json"]
+	var data = JSON.stringify({"statut": statut})  # Convertit les données en JSON
+
+	var error = http_request.request(url, headers, HTTPClient.METHOD_PUT, data)
+
+
+	if error != OK:
+		print("Erreur lors de la requête PATCH :", error)
 func ajouter_plats_a_preparer(nouveaux_plats, plat):
 	var plat_id = int(plat["plat"]["id"])
 
@@ -157,7 +173,7 @@ func commencer_cuisson():
 		# Création du plat fini
 		var plat_cuit = load("res://plats/plat_finie.tscn").instantiate()
 		plat_cuit.id_plat = plat_selectionne["id"]  # Assigner l'ID du plat cuit
-		
+		update_commande_status(plat_selectionne["id"], 2)
 		# Placer le plat sur le feu
 		#var feu_position = $Feu_1.global_position  # Récupérer la position du feu
 		#plat_cuit.global_position = feu_position
