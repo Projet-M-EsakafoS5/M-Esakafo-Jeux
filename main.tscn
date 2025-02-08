@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://bxva008y1wfej"]
+[gd_scene load_steps=9 format=3 uid="uid://bxva008y1wfej"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_ao518"]
 [ext_resource type="PackedScene" uid="uid://bt1ce5n6gqh8t" path="res://environnement/trano.tscn" id="2_nsfbb"]
 [ext_resource type="PackedScene" uid="uid://bqpkxht3mx8l8" path="res://player/goblin.tscn" id="3_eag20"]
 [ext_resource type="PackedScene" uid="uid://i0l0ytuubmmq" path="res://poubelle/poubelle.tscn" id="3_q3pvd"]
 [ext_resource type="PackedScene" uid="uid://bjemmyyxp2a3d" path="res://recettes/recette.tscn" id="4_jh34w"]
+[ext_resource type="PackedScene" uid="uid://bmcbejh7iytbh" path="res://environnement/table.tscn" id="5_knuj2"]
 [ext_resource type="PackedScene" uid="uid://df8rhf2w78kw0" path="res://porte/porte.tscn" id="6_at3vk"]
 [ext_resource type="PackedScene" uid="uid://c5omv818tk58f" path="res://plats/plat.tscn" id="7_pqvyr"]
 
@@ -23,6 +24,10 @@ position = Vector2(847, 349)
 [node name="Porte" parent="." instance=ExtResource("6_at3vk")]
 position = Vector2(72, 393)
 scale = Vector2(1.29335, 1.29335)
+
+[node name="Table" parent="." instance=ExtResource("5_knuj2")]
+position = Vector2(380, 299)
+scale = Vector2(1.56, 1.56)
 
 [node name="Goblin" parent="." instance=ExtResource("3_eag20")]
 position = Vector2(578, 330)

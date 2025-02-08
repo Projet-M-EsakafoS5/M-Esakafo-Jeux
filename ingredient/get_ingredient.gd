@@ -32,7 +32,11 @@ func _on_request_completed(result, response_code, headers, body):
 			if json_data is Dictionary and json_data.has("data"):
 				var ingredients = json_data["data"]
 				ingredient_recup.clear()  # Nettoyer le tableau avant d'ajouter de nouvelles données
-				var position = 100
+				var position_x = 350
+				var position_y = 300  # Position de départ en Y
+				var spacing_x = 64  # Espacement horizontal
+				var spacing_y = 0  # Espacement vertical
+				var plus = 0
 				for ingredient in ingredients:
 					var ingredient_info = {
 						"id": int(ingredient["id"]),
@@ -43,8 +47,13 @@ func _on_request_completed(result, response_code, headers, body):
 					}
 
 					ingredient_recup.append(ingredient_info)  # Ajouter l'ingrédient au tableau
-					spawn_food(ingredient, position)  # Utiliser la position incrémentée
-					position = position + 50  # Espacer les ingrédients
+					spawn_food(ingredient, position_x, position_y+plus)  # Passer les deux positions
+					plus+=32
+					position_x += spacing_x  # Décaler horizontalement
+					if position_x > 650:  # Si on dépasse une certaine largeur, aller à la ligne
+						position_x = 200
+						position_y -= position_y/2  # Descendre d'une ligne
+
 				#print("Ingrédients récupérés :", ingredient_recup)
 
 				# Assurer qu'on ne refait pas la requête à nouveau
@@ -56,23 +65,18 @@ func _on_request_completed(result, response_code, headers, body):
 	else:
 		print("Erreur de requête HTTP, code:", response_code)
 
-func spawn_food(ingredient, position):
-	# Charger la scène principale (Main)
-	var main_scene = get_tree().get_root().get_node("Main")  # Assure-toi que le nom du nœud est "Main"
-	
+func spawn_food(ingredient, position_x, position_y):
+	var main_scene = get_tree().get_root().get_node("Main")
 	if not main_scene:
-		print("Erreur : Impossible de trouver la scène principale 'Main'. Vérifiez si le nœud existe.")
+		print("Erreur : Impossible de trouver la scène principale 'Main'.")
 		return
 	
-	# Charger et instancier l'ingrédient
 	var ingredient_scene = load("res://ingredient/ingredient.tscn")
 	if not ingredient_scene:
-		print("Erreur : Impossible de charger la scène 'ingredient.tscn'. Vérifiez le chemin du fichier.")
+		print("Erreur : Impossible de charger la scène 'ingredient.tscn'.")
 		return
 
 	var new_ingredient = ingredient_scene.instantiate()
-
-	# Modifier le Sprite2D pour afficher la bonne image
 	var sprite = new_ingredient.get_node("Area2D/Sprite2D")
 	if not sprite:
 		print("Erreur : Impossible de trouver le Sprite2D dans la scène 'ingredient.tscn'.")
@@ -82,13 +86,11 @@ func spawn_food(ingredient, position):
 	if texture:
 		sprite.texture = texture
 		
-		# Ajuster l'échelle
 		var target_size = Vector2(30, 30)
 		var texture_size = texture.get_size()
 		sprite.scale = target_size / texture_size
 	
-	# Positionner l'ingrédient à la position spécifique
-	new_ingredient.position = Vector2(position, 100)  # Utiliser la position donnée (ajustable)
+	# Positionner l'ingrédient avec les coordonnées spécifiées
+	new_ingredient.position = Vector2(position_x, position_y)
 
-	# Ajouter l'ingrédient dans "Main"
 	main_scene.add_child(new_ingredient)
