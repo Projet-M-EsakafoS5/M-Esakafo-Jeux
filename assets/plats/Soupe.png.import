@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dc5da75ta4emc"
-path="res://.godot/imported/Soupe.png-8729976923354def8884ffce6e2845cd.ctex"
+uid="uid://i1paeftjnnde"
+path="res://.godot/imported/soupe.png-4670735db37f68accc01f98b7327dabe.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/plats/Soupe.png"
-dest_files=["res://.godot/imported/Soupe.png-8729976923354def8884ffce6e2845cd.ctex"]
+source_file="res://assets/plats/soupe.png"
+dest_files=["res://.godot/imported/soupe.png-4670735db37f68accc01f98b7327dabe.ctex"]
 
 [params]
 

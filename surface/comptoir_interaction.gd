@@ -67,18 +67,19 @@ func afficher_commandes(data):
 		var quantite = commande["quantite"]
 		var ticket = commande["numeroTicket"]
 		var statut = commande["statut"]
-		var sprite_path = "res://images/" + commande["plat"]["sprite"]  # Assure-toi que les images sont bien stockées
+		var sprite_path = "res://assets/plats/" + commande["plat"]["sprite"]  # Assure-toi que les images sont bien stockées
 		print(commande["plat"]["nom"])
 		# Créer un nouveau conteneur pour afficher la commande
 		var commande_ui = HBoxContainer.new()
 
 		# Ajouter une image
 		var image = TextureRect.new()
-		var camera = Camera2D.new()
 		image.texture = load(sprite_path) if ResourceLoader.exists(sprite_path) else null
-		image.custom_minimum_size = Vector2(64, 64)  # Ajuste selon besoin
+		image.stretch_mode = TextureRect.STRETCH_SCALE  # Utilise Stretch Scale pour étirer l'image
+		image.custom_minimum_size = Vector2(10, 10)  # Ajuste la taille si nécessaire
 		commande_ui.add_child(image)
-		commande_ui.add_child(camera)
+
+
 
 		# Ajouter le texte de la commande
 		var label = Label.new()
@@ -154,7 +155,7 @@ func _on_request_completed(_result, response_code, _headers, body):
 			for plat in data:
 				var id_plat = int(plat["plat"]["id"])
 				ajouter_plats_a_preparer(nouveaux_plats, plat)
-				update_commande_status(plat["id"], 1)
+				#update_commande_status(plat["id"], 1)
 			afficher_commandes(data)
 
 func update_commande_status(plat_id, statut):

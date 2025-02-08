@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ctvq46d84sye4"
-path="res://.godot/imported/Riz Blanc.png-96c169c412c07e21cc0d7fa8933cc43a.ctex"
+uid="uid://3uu8kbqgtyod"
+path="res://.godot/imported/riz.png-4cdda4ceeb391222d225ba6692a57d51.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/plats/Riz Blanc.png"
-dest_files=["res://.godot/imported/Riz Blanc.png-96c169c412c07e21cc0d7fa8933cc43a.ctex"]
+source_file="res://assets/plats/riz.png"
+dest_files=["res://.godot/imported/riz.png-4cdda4ceeb391222d225ba6692a57d51.ctex"]
 
 [params]
 
