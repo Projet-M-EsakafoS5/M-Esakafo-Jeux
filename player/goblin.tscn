@@ -2078,6 +2078,7 @@ height = 42.0
 polygon = PackedVector2Array(16.25, 18.75, 18.75, 36.25, 15, 38.75, 6.25, 42.5, -5, 42.5, -13.75, 41.25, -18.75, 37.5, -15, 20)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mxspu"]
+radius = 14.5491
 
 [node name="Goblin" type="CharacterBody2D"]
 position = Vector2(45, 22)
@@ -2115,5 +2116,5 @@ occluder = SubResource("661")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, -40)
-scale = Vector2(1.96254, 2.34714)
+scale = Vector2(1.28254, 3.58714)
 shape = SubResource("CircleShape2D_mxspu")
