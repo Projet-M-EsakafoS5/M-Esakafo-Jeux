@@ -20,18 +20,20 @@ var ingredient_trouve = null
 @onready var cuisson_manager = get_node("/root/CuissonManager")  
 
 var timer_cuisson = null  
-var temps_restant = 0.0  
-
+var temps_restant = 0.0 
 func _ready():
 	add_child(http_request)  
 	http_request.request(API_URL)  
 	http_request.connect("request_completed", Callable(self, "_on_request_completed"))
-
-	add_child(refresh_timer)
-	refresh_timer.wait_time = 2.0  # Mettre à jour toutes les 2 secondes
-	refresh_timer.connect("timeout", Callable(self, "actualiser_plats"))
-	refresh_timer.start()
-	#actualiser_plats()
+	
+	#if cuisson_manager.plats_a_preparer.size() == 0:
+		#add_child(refresh_timer)
+		#refresh_timer.wait_time = 2.0  # Mettre à jour toutes les 2 secondes
+		#refresh_timer.connect("timeout", Callable(self, "actualiser_plats"))
+		#refresh_timer.start()
+		#actualiser_plats()
+	#else:
+		#refresh_timer.stop()
 
 func _on_body_entered(body):
 	if body is Goblin:  # Vérifie si c'est le joueur
@@ -57,6 +59,7 @@ func _process(delta):
 		temps_restant -= delta
 		temps.text = "Temps restant : %.1f s" % temps_restant
 
+
 func afficher_commandes(data):
 	# Nettoyer les commandes précédentes
 	for child in command_list.get_children():
@@ -68,10 +71,10 @@ func afficher_commandes(data):
 		var ticket = commande["numeroTicket"]
 		var statut = commande["statut"]
 		var sprite_path = "res://assets/plats/" + commande["plat"]["sprite"]  # Assure-toi que les images sont bien stockées
-		print(commande["plat"]["nom"])
+		#print(commande["plat"]["nom"])
 		# Créer un nouveau conteneur pour afficher la commande
 		var commande_ui = HBoxContainer.new()
-
+		
 		# Ajouter une image
 		var image = TextureRect.new()
 		image.texture = load(sprite_path) if ResourceLoader.exists(sprite_path) else null
@@ -83,7 +86,7 @@ func afficher_commandes(data):
 
 		# Ajouter le texte de la commande
 		var label = Label.new()
-		label.text = "%s (x%d) - Ticket: %s - Statut: %d" % [plat_nom, quantite, ticket, statut]
+		label.text = "%s (x%d)" % [plat_nom, quantite]
 		commande_ui.add_child(label)
 
 		# Ajouter la commande à la liste
@@ -116,11 +119,12 @@ func selectionner_plat():
 		return
 
 	for plat in cuisson_manager.plats_a_preparer:
-		
+		var hbox = $"../HBoxContainer"
 		var plat_id = int(plat["plat"]["id"])
 		var bouton_plat = Button.new()
-		bouton_plat.text = plat["plat"]["nom"]
+		bouton_plat.text = "Recette "+plat["plat"]["nom"]
 		bouton_plat.connect("pressed", Callable(self, "_on_commande_selectionne").bind(plat))
+		hbox.add_child(bouton_plat)
 		add_child(bouton_plat)
 		
 		if cuisson_manager.est_plat_cuit(plat_id):
@@ -155,8 +159,9 @@ func _on_request_completed(_result, response_code, _headers, body):
 			for plat in data:
 				var id_plat = int(plat["plat"]["id"])
 				ajouter_plats_a_preparer(nouveaux_plats, plat)
-				#update_commande_status(plat["id"], 1)
-			afficher_commandes(data)
+				update_commande_status(plat["id"], 1)
+				http_request.request(API_URL)
+			afficher_commandes(liste_commande)
 
 func update_commande_status(plat_id, statut):
 	var url = "https://m-esakafo-1.onrender.com/api/commandes/%s/statut" % str(plat_id)  # Remplace le 1 par l'ID du plat
@@ -173,6 +178,7 @@ func update_commande_status(plat_id, statut):
 
 	if error != OK:
 		print("Erreur lors de la requête PATCH :", error)
+
 func ajouter_plats_a_preparer(nouveaux_plats, plat):
 	var plat_id = int(plat["plat"]["id"])
 
@@ -182,11 +188,12 @@ func ajouter_plats_a_preparer(nouveaux_plats, plat):
 		return
 
 	# Vérifie si le plat est déjà dans la liste avant de l'ajouter
-	if not cuisson_manager.plats_a_preparer.has(plat):
-		cuisson_manager.ajouter_plat_a_preparer(plat)
-		nouveaux_plats.append(plat)
-	#else:
-		#print("Plat déjà présent, ignoré :", plat.get("nom", ""))
+	for p in plat:
+		if not cuisson_manager.plats_a_preparer.has(plat):
+			cuisson_manager.ajouter_plat_a_preparer(plat)
+			nouveaux_plats.append(plat)
+		#else:
+			#print("Plat déjà présent, ignoré :", plat.get("nom", ""))
 
 	# Tri des nouveaux plats par ID
 	nouveaux_plats.sort_custom(func(a, b): return int(a["plat"]["id"]) < int(b["plat"]["id"]))
@@ -248,6 +255,7 @@ func commencer_cuisson():
 		
 		# Émettre un signal avec le plat
 		plat_pret.emit(plat_cuit)
+		http_request.request(API_URL)
 
 
 # Fonction désactivée mais conservée pour référence
@@ -259,6 +267,7 @@ func commencer_cuisson():
 	#print("Food info :", goblin.food_info)
 	#print("recettes :", recettes.recette_recup)
 	# Actualisation de la liste des plats depuis CuissonManager
+	#print(cuisson_manager.plats_a_preparer.size())
 	#http_request.request(API_URL)
 	#print(cuisson_manager.plats_deja_cuits_global)
 	#print(cuisson_manager.plats_a_preparer)

@@ -31,13 +31,14 @@ position = Vector2(578, 326)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="plat" parent="CanvasLayer" instance=ExtResource("7_pqvyr")]
-offset_left = 62.0
-offset_top = 39.0
-offset_right = 62.0
-offset_bottom = 39.0
+offset_left = 21.0
+offset_top = 22.0
+offset_right = 21.0
+offset_bottom = 22.0
+scale = Vector2(0.52, 0.6)
 
 [node name="IngredientsContainer" type="VBoxContainer" parent="CanvasLayer"]
-offset_left = 1034.0
-offset_top = 528.0
-offset_right = 1074.0
-offset_bottom = 568.0
+offset_left = 1035.0
+offset_top = 26.0
+offset_right = 1075.0
+offset_bottom = 66.0

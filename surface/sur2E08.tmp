@@ -49,16 +49,5 @@ horizontal_alignment = 1
 autowrap_mode = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-offset_left = -32.0
-offset_top = -118.0
-offset_right = 79.0
-offset_bottom = -78.0
-scale = Vector2(0.589486, 0.589486)
-pivot_offset = Vector2(-0.0901203, -1.12018)
-size_flags_horizontal = 4
-size_flags_vertical = 4
-alignment = 1
-
 [connection signal="body_entered" from="comptoir_interaction" to="comptoir_interaction" method="_on_body_entered"]
 [connection signal="body_exited" from="comptoir_interaction" to="comptoir_interaction" method="_on_body_exited"]
