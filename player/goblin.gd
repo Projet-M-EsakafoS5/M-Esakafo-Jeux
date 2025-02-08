@@ -83,7 +83,6 @@ func _on_area_entered(area: Area2D):
 
 		if food_held and "id_plat" in food_held:
 			var plat_id = food_held.id_plat
-			var statut = "livré"  # Ou un autre statut selon ton besoin
 			# Mise à jour de l'API avec le nouvel état
 			update_commande_status(plat_id, 3)
 
