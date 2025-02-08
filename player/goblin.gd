@@ -73,13 +73,47 @@ func _process(delta):
 			drop_food()
 
 func _on_area_entered(area: Area2D):
-	if area.name == "PoubelleArea":  # Vérifie que c'est bien la poubelle
+	if area.name == "PoubelleArea":  
 		can_drop_food = true
 		print("Proche de la poubelle, tu peux jeter la nourriture !")
-	if area.name == "PorteArea":  # Vérifie que c'est bien la poubelle
-		can_drop_food = true
+	
+	if area.name == "PorteArea":  
 		print("Proche de la porte, tu peux livrer la nourriture !")
-		
+
+		if food_held and "id_plat" in food_held:
+			var plat_id = food_held.id_plat
+			var statut = "livré"  # Ou un autre statut selon ton besoin
+
+			# Mise à jour de l'API avec le nouvel état
+			update_commande_status(plat_id, 3)
+
+			print("Plat livré avec ID :", plat_id)  
+			food_held.queue_free()  
+			food_held = null  
+			food_info = null  
+	else:
+		print("L'objet tenu n'est pas un plat valide !")
+
+func _on_request_completed(result, response_code, headers, body):
+	if response_code == 200:
+		print("Commande mise à jour avec succès !")
+	else:
+		print("Échec de la mise à jour. Code :", response_code, " Réponse :", body.get_string_from_utf8())
+
+func update_commande_status(plat_id, statut):
+	var url = "https://m-esakafo-1.onrender.com/api/commandes/%s/statut" % plat_id  # Remplace le 1 par l'ID du plat
+	var http_request = HTTPRequest.new()
+	add_child(http_request)  # Ajoute le HTTPRequest comme enfant
+
+	http_request.request_completed.connect(_on_request_completed)  # Connecte le signal pour récupérer la réponse
+
+	var headers = ["Content-Type: application/json"]
+	var data = JSON.stringify({"statut": statut})  # Convertit les données en JSON
+
+	var error = http_request.request(url, headers, HTTPClient.METHOD_PATCH, data)
+	if error != OK:
+		print("Erreur lors de la requête PATCH :", error)
+
 
 # Quand le joueur sort de la zone de la poubelle
 func _on_area_exited(area: Area2D):
