@@ -76,6 +76,10 @@ func _on_area_entered(area: Area2D):
 	if area.name == "PoubelleArea":  # Vérifie que c'est bien la poubelle
 		can_drop_food = true
 		print("Proche de la poubelle, tu peux jeter la nourriture !")
+	if area.name == "PorteArea":  # Vérifie que c'est bien la poubelle
+		can_drop_food = true
+		print("Proche de la porte, tu peux livrer la nourriture !")
+		
 
 # Quand le joueur sort de la zone de la poubelle
 func _on_area_exited(area: Area2D):

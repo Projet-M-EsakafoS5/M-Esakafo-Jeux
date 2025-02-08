@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://df8rhf2w78kw0"]
+[gd_scene load_steps=5 format=3 uid="uid://df8rhf2w78kw0"]
 
+[ext_resource type="Script" path="res://porte/porte.gd" id="1_1ls7j"]
 [ext_resource type="Texture2D" uid="uid://wy6a8c45b63c" path="res://assets/deco/Fichier 1porte.png" id="1_rph48"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rov4d"]
@@ -7,6 +8,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5l7ge"]
 
 [node name="Porte" type="Node2D"]
+script = ExtResource("1_1ls7j")
 
 [node name="Area2D" type="Area2D" parent="."]
 
