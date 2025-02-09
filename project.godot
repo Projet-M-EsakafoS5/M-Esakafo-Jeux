@@ -25,7 +25,7 @@ GetRecette="*res://recettes/get_recette.gd"
 [display]
 
 window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
+window/stretch/aspect="ignore"
 window/stretch/scale=0.75
 
 [input]

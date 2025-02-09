@@ -50,23 +50,32 @@ offset_top = 772.0
 offset_right = 1461.0
 offset_bottom = 803.0
 scale = Vector2(1.2, 1.2)
-text = "Press SPACE to interact"
 text_direction = 2
 
 [node name="Ingredient" type="Panel" parent="CanvasLayer"]
-offset_left = 17.0
-offset_top = 733.0
-offset_right = 57.0
-offset_bottom = 773.0
-scale = Vector2(5.82651, 1.62651)
+offset_left = 1264.0
+offset_top = 16.0
+offset_right = 1304.0
+offset_bottom = 56.0
+scale = Vector2(5.82651, 2.30651)
 script = ExtResource("8_jugcl")
 
+[node name="Label" type="Label" parent="CanvasLayer/Ingredient"]
+layout_mode = 0
+offset_left = 2.23118
+offset_top = 3.46842
+offset_right = 42.2312
+offset_bottom = 26.4684
+scale = Vector2(0.147175, 0.445048)
+text = "Case a ingredients"
+
 [node name="IngredientsContainer" type="VBoxContainer" parent="CanvasLayer/Ingredient"]
-offset_left = 2.52051
-offset_top = 7.90039
-offset_right = 42.5205
-offset_bottom = 47.9004
-scale = Vector2(0.145493, 0.487622)
+layout_mode = 0
+offset_left = 2.40281
+offset_top = 17.3422
+offset_right = 42.4028
+offset_bottom = 57.3422
+scale = Vector2(0.109332, 0.262176)
 
 [node name="CoinCuisine" parent="." instance=ExtResource("9_prx2b")]
 position = Vector2(721, 73)

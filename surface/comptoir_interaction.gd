@@ -3,6 +3,7 @@ extends Area2D
 signal plat_pret(plat)
 signal commande_selectionne(plat)
 @onready var ingredients_container = get_node("/root/Main/CanvasLayer/Ingredient/IngredientsContainer")
+@onready var UI = get_node("/root/Main/CanvasLayer/Interaction_UI")
 var player_nearby = false  
 @onready var hbox = $"../HBoxContainer"
 var ingredient_plats = []  # Liste des ingrédients nécessaires pour le plat sélectionné
@@ -46,6 +47,10 @@ func _on_body_exited(body):
 		player_nearby = false
 
 func _process(delta):
+	if player_nearby:
+		UI.text = "'E' pour interagir
+		'SPACE' pour pick & drop"
+
 	if player_nearby and Input.is_action_just_pressed("interact"):
 		#print("Interaction avec le feu.")
 		selectionner_plat()
@@ -114,7 +119,7 @@ func _on_commande_selectionne(plat):
 func selectionner_plat():
 	if cuisson_manager.plats_a_preparer.size() == 0:
 		http_request.request(API_URL) 
-		print("Aucun plat à préparer.")
+		UI.text = "Aucun plat à préparer."
 		return
 
 	if plat_selectionne:

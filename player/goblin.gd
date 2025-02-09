@@ -1,5 +1,5 @@
 class_name Goblin extends CharacterBody2D
-
+@onready var UI = get_node("/root/Main/CanvasLayer/Interaction_UI")
 const MOTION_SPEED = 160 # Pixels/second.
 var food_info = null
 var last_direction = Vector2(1, 0)
@@ -76,11 +76,12 @@ func _process(delta):
 func _on_area_entered(area: Area2D):
 	if area.name == "PoubelleArea":  
 		can_drop_food = true
+		UI.text = "'SPACE' pour jeter"
 		print("Proche de la poubelle, tu peux jeter la nourriture !")
 	
 	if area.name == "PorteArea":  
 		print("Proche de la porte, tu peux livrer la nourriture !")
-
+		UI.text = "Livraison"
 		if food_held and "id_plat" in food_held:
 			var plat_id = food_held.id_plat
 			# Mise à jour de l'API avec le nouvel état
