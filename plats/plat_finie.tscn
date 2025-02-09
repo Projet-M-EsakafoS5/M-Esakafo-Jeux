@@ -4,20 +4,23 @@
 [ext_resource type="Texture2D" uid="uid://nsdi7vqv88qu" path="res://assets/bag/ato.png" id="1_vgato"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_skj6u"]
-size = Vector2(37, 21)
+size = Vector2(50, 36)
 
 [node name="PlatFinie" type="Node2D"]
 script = ExtResource("1_guo36")
 
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-0.5, 3.5)
-shape = SubResource("RectangleShape2D_skj6u")
-
-[node name="Ato" type="Sprite2D" parent="Area2D"]
-position = Vector2(5.96046e-08, -9)
+[node name="Ato" type="Sprite2D" parent="."]
+position = Vector2(-7, -30)
 scale = Vector2(0.19958, 0.19958)
 texture = ExtResource("1_vgato")
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[node name="Area2D" type="Area2D" parent="Ato"]
+position = Vector2(-2.9865e-07, 45.0947)
+scale = Vector2(5.01052, 5.01052)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ato/Area2D"]
+position = Vector2(3, 76)
+rotation = 0.462313
+shape = SubResource("RectangleShape2D_skj6u")
+
+[connection signal="body_entered" from="Ato/Area2D" to="." method="_on_area_2d_body_entered"]

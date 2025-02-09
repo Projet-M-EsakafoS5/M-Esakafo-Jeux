@@ -22,6 +22,11 @@ Ingredient="*res://ingredient/ingredient.gd"
 GetIngredient="*res://ingredient/get_ingredient.gd"
 GetRecette="*res://recettes/get_recette.gd"
 
+[display]
+
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
+
 [input]
 
 move_down={

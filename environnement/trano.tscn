@@ -1,12 +1,14 @@
-[gd_scene load_steps=13 format=3 uid="uid://bt1ce5n6gqh8t"]
+[gd_scene load_steps=15 format=3 uid="uid://bt1ce5n6gqh8t"]
 
 [ext_resource type="Texture2D" uid="uid://chloj7c6oq6hu" path="res://assets/environnement/Sol.png" id="1_5np8t"]
+[ext_resource type="Texture2D" uid="uid://dbcih44vi8hg5" path="res://assets/environnement/Fichier 1street takona.png" id="1_eiybd"]
 [ext_resource type="Texture2D" uid="uid://rvax4c3j2owg" path="res://assets/environnement/fenetreVert.png" id="2_153bi"]
 [ext_resource type="Texture2D" uid="uid://bi1oroa8njn6s" path="res://assets/environnement/Murboi.png" id="3_xr1xp"]
 [ext_resource type="Texture2D" uid="uid://biq3ddft20qtx" path="res://assets/environnement/Murboi3.png" id="4_mkgm7"]
 [ext_resource type="Texture2D" uid="uid://m5n6sm5xw5ll" path="res://assets/environnement/MurBlanc.png" id="5_igv3x"]
 [ext_resource type="Texture2D" uid="uid://byyhbxyk6wem3" path="res://assets/environnement/decorfleur.png" id="6_n5gq3"]
 [ext_resource type="Texture2D" uid="uid://3jo2gcseiupx" path="res://assets/environnement/cadretrano.png" id="7_s1mmj"]
+[ext_resource type="Texture2D" uid="uid://bsq36yqa0bois" path="res://assets/environnement/Fichier 2street manakona.png" id="9_oo5hu"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_v100m"]
 normal = Vector2(0.501036, 0.865426)
@@ -24,6 +26,12 @@ size = Vector2(20, 30)
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0vg20"]
 
 [node name="Plancher" type="Node2D"]
+
+[node name="Fichier1StreetTakona" type="Sprite2D" parent="."]
+position = Vector2(534, 428)
+rotation = -0.0221369
+scale = Vector2(1.68, 1.68)
+texture = ExtResource("1_eiybd")
 
 [node name="Sol" type="Sprite2D" parent="."]
 position = Vector2(559, 355)
@@ -87,3 +95,8 @@ shape = SubResource("WorldBoundaryShape2D_0vg20")
 [node name="Cadretrano" type="Sprite2D" parent="."]
 position = Vector2(555, 284)
 texture = ExtResource("7_s1mmj")
+
+[node name="Fichier2StreetManakona" type="Sprite2D" parent="."]
+position = Vector2(215, 643)
+scale = Vector2(0.766449, 0.766449)
+texture = ExtResource("9_oo5hu")

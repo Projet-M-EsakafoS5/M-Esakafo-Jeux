@@ -18,8 +18,9 @@ var ingredient_trouve = null
 @onready var recettes = get_node("/root/Main/Recette")  
 @onready var http_request = HTTPRequest.new()  
 @onready var refresh_timer = Timer.new()  
-@onready var cuisson_manager = get_node("/root/CuissonManager")
+@onready var cuisson_manager = get_node("/root/CuissonManager")  
 var bouton_plat = Button.new()
+
 
 var timer_cuisson = null  
 var temps_restant = 0.0 
@@ -27,12 +28,11 @@ func _ready():
 	add_child(http_request)  
 	http_request.request(API_URL)  
 	http_request.connect("request_completed", Callable(self, "_on_request_completed"))
-	
 	#if cuisson_manager.plats_a_preparer.size() == 0:
 		#add_child(refresh_timer)
-		#refresh_timer.wait_time = 2.0  # Mettre à jour toutes les 2 secondes
-		#refresh_timer.connect("timeout", Callable(self, "actualiser_plats"))
-		#refresh_timer.start()
+	refresh_timer.wait_time = 5.0  # Mettre à jour toutes les 2 secondes
+	refresh_timer.connect("timeout", Callable(self, "actualiser_plats"))
+	refresh_timer.start()
 		#actualiser_plats()
 	#else:
 		#refresh_timer.stop()
@@ -62,12 +62,12 @@ func _process(delta):
 		bouton_plat.text = "Temps restant : %.1f s" % temps_restant
 
 
-func afficher_commandes(data):
+func afficher_commandes(liste_commande):
 	# Nettoyer les commandes précédentes
 	for child in command_list.get_children():
 		child.queue_free()
 
-	for commande in data:
+	for commande in liste_commande:
 		var plat_nom = commande["plat"]["nom"]
 		var quantite = commande["quantite"]
 		var ticket = commande["numeroTicket"]
@@ -113,6 +113,7 @@ func _on_commande_selectionne(plat):
 # Sélectionne un plat à cuire
 func selectionner_plat():
 	if cuisson_manager.plats_a_preparer.size() == 0:
+		http_request.request(API_URL) 
 		print("Aucun plat à préparer.")
 		return
 
@@ -121,8 +122,9 @@ func selectionner_plat():
 		return
 
 	for plat in cuisson_manager.plats_a_preparer:
-		
 		var plat_id = int(plat["plat"]["id"])
+		if !bouton_plat:
+			bouton_plat = Button.new()
 		bouton_plat.text = "Recette "+plat["plat"]["nom"]
 		bouton_plat.connect("pressed", Callable(self, "_on_commande_selectionne").bind(plat))
 		hbox.add_child(bouton_plat)
@@ -152,17 +154,17 @@ func _on_request_completed(_result, response_code, _headers, body):
 		var json = JSON.new()
 		var parse_result = json.parse(body.get_string_from_utf8())
 		var data = json.get_data()
-		liste_commande = data
+		
+
 		if parse_result == OK and typeof(data) == TYPE_ARRAY:
 			var nouveaux_plats = []
-
+			liste_commande = data
 			# Vérification de chaque plat
 			for plat in data:
 				var id_plat = int(plat["plat"]["id"])
 				ajouter_plats_a_preparer(nouveaux_plats, plat)
 				#update_commande_status(plat["id"], 1)
 				#http_request.request(API_URL)
-			afficher_commandes(data)
 
 func update_commande_status(plat_id, statut):
 	var url = "https://m-esakafo-1.onrender.com/api/commandes/%s/statut" % str(plat_id)  # Remplace le 1 par l'ID du plat
@@ -175,7 +177,7 @@ func update_commande_status(plat_id, statut):
 	var data = JSON.stringify({"statut": statut})  # Convertit les données en JSON
 
 	var error = http_request.request(url, headers, HTTPClient.METHOD_PUT, data)
-
+	print("statut updaté: commande numero ", plat_id)
 
 	if error != OK:
 		print("Erreur lors de la requête PATCH :", error)
@@ -193,6 +195,8 @@ func ajouter_plats_a_preparer(nouveaux_plats, plat):
 		if not cuisson_manager.plats_a_preparer.has(plat):
 			cuisson_manager.ajouter_plat_a_preparer(plat)
 			nouveaux_plats.append(plat)
+			update_commande_status(plat["id"], 1)
+	afficher_commandes(cuisson_manager.plats_a_preparer)
 		#else:
 			#print("Plat déjà présent, ignoré :", plat.get("nom", ""))
 
@@ -233,23 +237,23 @@ func commencer_cuisson():
 		temps_restant = Utiles.format_time(plat_selectionne["plat"].get("tempsCuisson", ""))
 		timer_cuisson = get_tree().create_timer(temps_restant)
 		print("Début de la cuisson de", plat_selectionne["plat"]["nom"])
-		
+		update_commande_status(plat_selectionne["id"], 2)
 		await timer_cuisson.timeout  # Attendre la fin du timer
 		
 		# Création du plat fini
 		var plat_cuit = load("res://plats/plat_finie.tscn").instantiate()
+		plat_cuit.position = Vector2(0, -30)
 		plat_cuit.id_plat = plat_selectionne["id"]  # Assigner l'ID du plat cuit
-		update_commande_status(plat_selectionne["id"], 2)
+		
 		# Placer le plat sur le feu
 		#var feu_position = $Feu_1.global_position  # Récupérer la position du feu
 		#plat_cuit.global_position = feu_position
 
 		# Ajouter la scène au parent (la cuisine ou la map)
 		get_parent().add_child(plat_cuit)
-		plat_cuit.position = Vector2(0, -50)
 		
 		print("Plat cuit :", plat_selectionne["plat"]["nom"], " placé sur le feu !")
-
+		bouton_plat.queue_free()
 		# Réinitialisation des variables
 		plat_selectionne = null
 		temps_restant = 0
@@ -257,11 +261,9 @@ func commencer_cuisson():
 		
 		# Émettre un signal avec le plat
 		plat_pret.emit(plat_cuit)
-		http_request.request(API_URL)
 		for node in ingredients_container.get_children():
 			node.queue_free()
-			
-		hbox.queue_free()
+		http_request.request(API_URL)
 
 
 # Fonction désactivée mais conservée pour référence
@@ -269,11 +271,11 @@ func commencer_cuisson():
 #     var json = JSON.parse(body.get_string_from_utf8())
 #     print("Données API reçues :", json.result)
 
-#func actualiser_plats():
+func actualiser_plats():
 	#print("Food info :", goblin.food_info)
 	#print("recettes :", recettes.recette_recup)
 	# Actualisation de la liste des plats depuis CuissonManager
-	#print(cuisson_manager.plats_a_preparer.size())
-	#http_request.request(API_URL)
+	print(cuisson_manager.plats_a_preparer.size())
+	http_request.request(API_URL)
 	#print(cuisson_manager.plats_deja_cuits_global)
 	#print(cuisson_manager.plats_a_preparer)
