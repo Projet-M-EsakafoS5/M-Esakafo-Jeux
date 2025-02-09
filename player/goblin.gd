@@ -81,8 +81,8 @@ func _on_area_entered(area: Area2D):
 	
 	if area.name == "PorteArea":  
 		print("Proche de la porte, tu peux livrer la nourriture !")
-		UI.text = "Livraison effectuée"
 		if food_held and "id_plat" in food_held:
+			UI.text = "Livraison effectuée"
 			var plat_id = food_held.id_plat
 			# Mise à jour de l'API avec le nouvel état
 			update_commande_status(plat_id, 3)
@@ -93,6 +93,7 @@ func _on_area_entered(area: Area2D):
 			food_info = null  
 	else:
 		print("L'objet tenu n'est pas un plat valide !")
+		UI.text = "Livraison non disponible"
 
 func _on_request_completed(result, response_code, headers, body):
 	if response_code == 200:
