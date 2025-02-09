@@ -76,12 +76,12 @@ func _process(delta):
 func _on_area_entered(area: Area2D):
 	if area.name == "PoubelleArea":  
 		can_drop_food = true
-		UI.text = "'SPACE' pour jeter"
+		UI.text = "'F' pour jeter"
 		print("Proche de la poubelle, tu peux jeter la nourriture !")
 	
 	if area.name == "PorteArea":  
 		print("Proche de la porte, tu peux livrer la nourriture !")
-		UI.text = "Livraison"
+		UI.text = "Livraison effectuée"
 		if food_held and "id_plat" in food_held:
 			var plat_id = food_held.id_plat
 			# Mise à jour de l'API avec le nouvel état

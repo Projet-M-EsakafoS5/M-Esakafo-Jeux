@@ -4,7 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://cmhvl0amtgvlc" path="res://surface/Fichier 1.png" id="2_1tkn8"]
 [ext_resource type="Script" path="res://surface/comptoir_interaction.gd" id="2_bdcvo"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_2fgs0"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7hx0e"]
+size = Vector2(117.937, 24.1584)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j76sa"]
 size = Vector2(170.222, 21.4791)
@@ -21,9 +22,9 @@ script = ExtResource("2_bdcvo")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="comptoir_interaction" groups=["surface"]]
 position = Vector2(-24.7139, 16.4528)
-rotation = 0.147033
-scale = Vector2(2.48751, 1.8227)
-shape = SubResource("CircleShape2D_2fgs0")
+rotation = 0.535415
+scale = Vector2(0.430741, 1)
+shape = SubResource("RectangleShape2D_7hx0e")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 

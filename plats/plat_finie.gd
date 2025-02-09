@@ -1,6 +1,7 @@
 extends Node2D 
 var gobelin_present: Goblin = null
 var id_plat = null
+var sprite = null
 
 func _ready():
 	if id_plat != null:

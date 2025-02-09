@@ -49,7 +49,7 @@ func _on_body_exited(body):
 func _process(delta):
 	if player_nearby:
 		UI.text = "'E' pour interagir
-		'SPACE' pour pick & drop"
+		 'F' pour pick & drop"
 
 	if player_nearby and Input.is_action_just_pressed("interact"):
 		#print("Interaction avec le feu.")
@@ -170,7 +170,7 @@ func _on_request_completed(_result, response_code, _headers, body):
 				ajouter_plats_a_preparer(nouveaux_plats, plat)
 				#update_commande_status(plat["id"], 1)
 				#http_request.request(API_URL)
-
+		afficher_commandes(cuisson_manager.plats_a_preparer)
 func update_commande_status(plat_id, statut):
 	var url = "https://m-esakafo-1.onrender.com/api/commandes/%s/statut" % str(plat_id)  # Remplace le 1 par l'ID du plat
 	var http_request = HTTPRequest.new()
@@ -200,8 +200,8 @@ func ajouter_plats_a_preparer(nouveaux_plats, plat):
 		if not cuisson_manager.plats_a_preparer.has(plat):
 			cuisson_manager.ajouter_plat_a_preparer(plat)
 			nouveaux_plats.append(plat)
-			update_commande_status(plat["id"], 1)
-	afficher_commandes(cuisson_manager.plats_a_preparer)
+			#update_commande_status(plat["id"], 1)
+	
 		#else:
 			#print("Plat déjà présent, ignoré :", plat.get("nom", ""))
 
@@ -242,6 +242,7 @@ func commencer_cuisson():
 		temps_restant = Utiles.format_time(plat_selectionne["plat"].get("tempsCuisson", ""))
 		timer_cuisson = get_tree().create_timer(temps_restant)
 		print("Début de la cuisson de", plat_selectionne["plat"]["nom"])
+		UI.text = "Début de la cuisson de" + plat_selectionne["plat"]["nom"]
 		update_commande_status(plat_selectionne["id"], 2)
 		await timer_cuisson.timeout  # Attendre la fin du timer
 		
@@ -249,6 +250,11 @@ func commencer_cuisson():
 		var plat_cuit = load("res://plats/plat_finie.tscn").instantiate()
 		plat_cuit.position = Vector2(0, -30)
 		plat_cuit.id_plat = plat_selectionne["id"]  # Assigner l'ID du plat cuit
+		plat_cuit.sprite = "res://assets/plats/"+ plat_selectionne["plat"]["sprite"]
+		var sprite = plat_cuit.get_node("Ato")  # Accéder au Sprite2D
+		var min_size = Vector2(30, 30)
+		sprite.scale = min_size / (sprite.texture.get_size()/2)
+		sprite.texture = load(plat_cuit.sprite)
 		
 		# Placer le plat sur le feu
 		#var feu_position = $Feu_1.global_position  # Récupérer la position du feu
@@ -258,6 +264,7 @@ func commencer_cuisson():
 		get_parent().add_child(plat_cuit)
 		
 		print("Plat cuit :", plat_selectionne["plat"]["nom"], " placé sur le feu !")
+		UI.text = "prete a etre livrée"
 		bouton_plat.queue_free()
 		# Réinitialisation des variables
 		plat_selectionne = null
