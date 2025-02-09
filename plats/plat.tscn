@@ -1,11 +1,23 @@
-[gd_scene format=3 uid="uid://c5omv818tk58f"]
+[gd_scene load_steps=2 format=3 uid="uid://c5omv818tk58f"]
+
+[ext_resource type="Script" path="res://plats/panel.gd" id="1_tj7q3"]
 
 [node name="plat" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 
-[node name="PlatsContainer" type="GridContainer" parent="."]
+[node name="Panel" type="Panel" parent="."]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+scale = Vector2(1.38338, 1.38338)
+script = ExtResource("1_tj7q3")
+
+[node name="PlatsContainer" type="GridContainer" parent="Panel"]
+layout_mode = 0
+offset_left = 2.38078
+offset_top = 2.7209
+offset_right = 42.3808
+offset_bottom = 42.7209
+scale = Vector2(0.866178, 0.866178)
 theme_override_constants/h_separation = 100

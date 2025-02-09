@@ -63,7 +63,7 @@ position = Vector2(721, 73)
 scale = Vector2(1.04, 1.04)
 
 [node name="Goblin" parent="." instance=ExtResource("3_eag20")]
-position = Vector2(604, 549)
+position = Vector2(788, 515)
 scale = Vector2(1.48, 1.48)
 
 [node name="Poubelle" parent="." instance=ExtResource("3_q3pvd")]

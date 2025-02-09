@@ -2088,9 +2088,7 @@ script = ExtResource("2")
 position = Vector2(-2, -44)
 scale = Vector2(1.55556, 1.55556)
 sprite_frames = SubResource("260")
-animation = &"45back_left_idle"
-frame = 3
-frame_progress = 0.122372
+animation = &"front_idle"
 
 [node name="Shadow" type="Sprite2D" parent="."]
 modulate = Color(0.129412, 0.0745098, 0.192157, 0.647059)

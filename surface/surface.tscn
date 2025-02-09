@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://chpas3ywnwvp8"]
+[gd_scene load_steps=8 format=3 uid="uid://chpas3ywnwvp8"]
 
 [ext_resource type="Script" path="res://surface/surface.gd" id="1_g2ujm"]
 [ext_resource type="Texture2D" uid="uid://cmhvl0amtgvlc" path="res://surface/Fichier 1.png" id="2_1tkn8"]
 [ext_resource type="Script" path="res://surface/comptoir_interaction.gd" id="2_bdcvo"]
+[ext_resource type="Texture2D" uid="uid://cpmk6ri4d4xer" path="res://assets/plats/Steak.png" id="4_l0bc7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7hx0e"]
 size = Vector2(117.937, 24.1584)
@@ -59,6 +60,11 @@ pivot_offset = Vector2(-0.0901203, -1.12018)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 alignment = 1
+
+[node name="Steak" type="Sprite2D" parent="."]
+position = Vector2(-2, -74)
+scale = Vector2(0.676796, 0.676796)
+texture = ExtResource("4_l0bc7")
 
 [connection signal="body_entered" from="comptoir_interaction" to="comptoir_interaction" method="_on_body_entered"]
 [connection signal="body_exited" from="comptoir_interaction" to="comptoir_interaction" method="_on_body_exited"]
