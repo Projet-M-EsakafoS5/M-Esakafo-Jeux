@@ -1,12 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://bmcbejh7iytbh"]
+[gd_scene load_steps=6 format=3 uid="uid://bmcbejh7iytbh"]
 
 [ext_resource type="Texture2D" uid="uid://bkom3a8xmdrlf" path="res://assets/environnement/Table.png" id="1_1phck"]
+[ext_resource type="Texture2D" uid="uid://cq8phpmji4did" path="res://assets/environnement/chaise.png" id="2_7il4k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7uwhh"]
 size = Vector2(220.586, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h8rdp"]
 size = Vector2(256.121, 15.5629)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hayev"]
+size = Vector2(59.7297, 25.244)
 
 [node name="Table" type="Node2D"]
 
@@ -26,3 +30,13 @@ position = Vector2(32, 49)
 rotation = 0.52584
 scale = Vector2(0.860881, 1)
 shape = SubResource("RectangleShape2D_h8rdp")
+
+[node name="Chaise" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(-55, 82)
+scale = Vector2(1.24956, 1.24956)
+texture = ExtResource("2_7il4k")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(84.5433, 107.953)
+rotation = -0.370054
+shape = SubResource("RectangleShape2D_hayev")

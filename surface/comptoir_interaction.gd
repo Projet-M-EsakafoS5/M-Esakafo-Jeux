@@ -18,7 +18,7 @@ var ingredient_trouve = null
 @onready var recettes = get_node("/root/Main/Recette")  
 @onready var http_request = HTTPRequest.new()  
 @onready var refresh_timer = Timer.new()  
-@onready var cuisson_manager = get_node("/root/CuissonManager")  
+@onready var cuisson_manager = get_node("/root/CuissonManager")
 var bouton_plat = Button.new()
 
 var timer_cuisson = null  
@@ -246,6 +246,7 @@ func commencer_cuisson():
 
 		# Ajouter la scène au parent (la cuisine ou la map)
 		get_parent().add_child(plat_cuit)
+		plat_cuit.position = Vector2(0, -50)
 		
 		print("Plat cuit :", plat_selectionne["plat"]["nom"], " placé sur le feu !")
 

@@ -5,10 +5,10 @@
 [ext_resource type="Script" path="res://surface/comptoir_interaction.gd" id="2_bdcvo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7hx0e"]
-size = Vector2(88.2443, 19.9389)
+size = Vector2(117.937, 24.1584)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j76sa"]
-size = Vector2(150.695, 21.4791)
+size = Vector2(170.222, 21.4791)
 
 [sub_resource type="LabelSettings" id="LabelSettings_0cfj8"]
 font_size = 8
@@ -21,20 +21,20 @@ script = ExtResource("1_g2ujm")
 script = ExtResource("2_bdcvo")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="comptoir_interaction" groups=["surface"]]
-position = Vector2(-18.264, 18.388)
-rotation = 0.610148
+position = Vector2(-24.7139, 16.4528)
+rotation = 0.535415
 scale = Vector2(0.430741, 1)
 shape = SubResource("RectangleShape2D_7hx0e")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="Fichier1" type="Sprite2D" parent="StaticBody2D"]
-position = Vector2(-1, -26)
-scale = Vector2(0.28, 0.28)
+position = Vector2(1, -38)
+scale = Vector2(0.35194, 0.35194)
 texture = ExtResource("2_1tkn8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(-2.41778, -7.12602)
+position = Vector2(-5.37492, -8.83512)
 rotation = -2.61754
 scale = Vector2(0.349833, 1.63036)
 shape = SubResource("RectangleShape2D_j76sa")

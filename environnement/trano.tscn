@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://bt1ce5n6gqh8t"]
+[gd_scene load_steps=13 format=3 uid="uid://bt1ce5n6gqh8t"]
 
 [ext_resource type="Texture2D" uid="uid://chloj7c6oq6hu" path="res://assets/environnement/Sol.png" id="1_5np8t"]
 [ext_resource type="Texture2D" uid="uid://rvax4c3j2owg" path="res://assets/environnement/fenetreVert.png" id="2_153bi"]
 [ext_resource type="Texture2D" uid="uid://bi1oroa8njn6s" path="res://assets/environnement/Murboi.png" id="3_xr1xp"]
 [ext_resource type="Texture2D" uid="uid://biq3ddft20qtx" path="res://assets/environnement/Murboi3.png" id="4_mkgm7"]
 [ext_resource type="Texture2D" uid="uid://m5n6sm5xw5ll" path="res://assets/environnement/MurBlanc.png" id="5_igv3x"]
+[ext_resource type="Texture2D" uid="uid://byyhbxyk6wem3" path="res://assets/environnement/decorfleur.png" id="6_n5gq3"]
+[ext_resource type="Texture2D" uid="uid://3jo2gcseiupx" path="res://assets/environnement/cadretrano.png" id="7_s1mmj"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_v100m"]
 normal = Vector2(0.501036, 0.865426)
@@ -13,6 +15,13 @@ distance = 14.1561
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_iauak"]
 normal = Vector2(-0.498471, 0.866906)
 distance = 2.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tp8sa"]
+size = Vector2(20, 30)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_r7jxv"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0vg20"]
 
 [node name="Plancher" type="Node2D"]
 
@@ -53,3 +62,28 @@ shape = SubResource("WorldBoundaryShape2D_v100m")
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(340, 4)
 shape = SubResource("WorldBoundaryShape2D_iauak")
+
+[node name="Decorfleur" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(83, -55)
+scale = Vector2(1.30705, 1.30705)
+texture = ExtResource("6_n5gq3")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(454, 91)
+rotation = 0.512946
+scale = Vector2(6.28, 1)
+shape = SubResource("RectangleShape2D_tp8sa")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-31, 255)
+rotation = 0.51133
+shape = SubResource("WorldBoundaryShape2D_r7jxv")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(364, 230)
+rotation = -0.549252
+shape = SubResource("WorldBoundaryShape2D_0vg20")
+
+[node name="Cadretrano" type="Sprite2D" parent="."]
+position = Vector2(555, 284)
+texture = ExtResource("7_s1mmj")

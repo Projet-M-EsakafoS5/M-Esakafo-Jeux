@@ -23,7 +23,7 @@ func generer_feux():
 		main.add_child(feu_instance)
 		main.move_child(feu_instance, 1)
 		feux.append(feu_instance)
-
+		feu_instance.z_index = 1
 		# Positionnement manuel (ex: en ligne horizontale)
-		var offset = Vector2(600, 150)
+		var offset = Vector2(1000, 350)
 		feu_instance.position = Vector2(i * spacing, i * spacing/2) + offset

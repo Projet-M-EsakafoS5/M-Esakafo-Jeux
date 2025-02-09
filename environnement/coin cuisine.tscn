@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://noqjr366juli"]
+
+[ext_resource type="Texture2D" uid="uid://whfvap0x47vy" path="res://assets/environnement/Cuisine.png" id="1_8xrea"]
+[ext_resource type="Texture2D" uid="uid://ddqyuh7hp6nhw" path="res://assets/environnement/accessoire.png" id="2_hgwry"]
+[ext_resource type="Texture2D" uid="uid://bjipak3dbyswj" path="res://assets/environnement/Fleur.png" id="3_aj6yb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ld8nm"]
+size = Vector2(33.4208, 20)
+
+[node name="CoinCuisine" type="Node2D"]
+
+[node name="Cuisine" type="Sprite2D" parent="."]
+position = Vector2(-2, 0)
+scale = Vector2(1.48, 1.48)
+texture = ExtResource("1_8xrea")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-2.8063, 74.9288)
+rotation = -2.61922
+scale = Vector2(9.984, -2.66632)
+shape = SubResource("RectangleShape2D_ld8nm")
+
+[node name="Accessoire" type="Sprite2D" parent="."]
+position = Vector2(35, 39)
+texture = ExtResource("2_hgwry")
+
+[node name="Fleur" type="Sprite2D" parent="."]
+position = Vector2(-118, -67)
+texture = ExtResource("3_aj6yb")

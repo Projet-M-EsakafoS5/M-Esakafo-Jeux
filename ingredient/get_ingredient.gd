@@ -32,8 +32,8 @@ func _on_request_completed(result, response_code, headers, body):
 			if json_data is Dictionary and json_data.has("data"):
 				var ingredients = json_data["data"]
 				ingredient_recup.clear()  # Nettoyer le tableau avant d'ajouter de nouvelles données
-				var position_x = 250
-				var position_y = 250  # Position de départ en Y
+				var position_x = 275
+				var position_y = 275  # Position de départ en Y
 				var spacing_x = 64  # Espacement horizontal
 				var spacing_y = 0  # Espacement vertical
 				var plus = 0
@@ -50,8 +50,8 @@ func _on_request_completed(result, response_code, headers, body):
 					spawn_food(ingredient, position_x, position_y+plus)  # Passer les deux positions
 					plus+=32
 					position_x += spacing_x  # Décaler horizontalement
-					if position_x > 550:  # Si on dépasse une certaine largeur, aller à la ligne
-						position_x = 250
+					if position_x > 575:  # Si on dépasse une certaine largeur, aller à la ligne
+						position_x = 225
 						position_y -= position_y/2  # Descendre d'une ligne
 
 				#print("Ingrédients récupérés :", ingredient_recup)
