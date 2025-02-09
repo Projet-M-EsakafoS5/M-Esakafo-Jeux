@@ -2,7 +2,7 @@ extends Area2D
 
 signal plat_pret(plat)
 signal commande_selectionne(plat)
-@onready var ingredients_container = get_node("/root/Main/CanvasLayer/IngredientsContainer")
+@onready var ingredients_container = get_node("/root/Main/CanvasLayer/Ingredient/IngredientsContainer")
 var player_nearby = false  
 @onready var hbox = $"../HBoxContainer"
 var ingredient_plats = []  # Liste des ingrédients nécessaires pour le plat sélectionné

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bxva008y1wfej"]
+[gd_scene load_steps=12 format=3 uid="uid://bxva008y1wfej"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_ao518"]
 [ext_resource type="PackedScene" uid="uid://b4iijdpu6ej0r" path="res://environnement/street.tscn" id="2_lo8i8"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bmcbejh7iytbh" path="res://environnement/table.tscn" id="5_knuj2"]
 [ext_resource type="PackedScene" uid="uid://df8rhf2w78kw0" path="res://porte/porte.tscn" id="6_at3vk"]
 [ext_resource type="PackedScene" uid="uid://c5omv818tk58f" path="res://plats/plat.tscn" id="7_pqvyr"]
+[ext_resource type="Script" path="res://ingredientpanel.gd" id="8_jugcl"]
 [ext_resource type="PackedScene" uid="uid://noqjr366juli" path="res://environnement/coin cuisine.tscn" id="9_prx2b"]
 
 [node name="Main" type="Control" groups=["main"]]
@@ -43,20 +44,29 @@ offset_right = 21.0
 offset_bottom = 22.0
 scale = Vector2(0.52, 0.6)
 
-[node name="IngredientsContainer" type="VBoxContainer" parent="CanvasLayer"]
-offset_left = 1035.0
-offset_top = 26.0
-offset_right = 1075.0
-offset_bottom = 66.0
-
 [node name="Interaction_UI" type="Button" parent="CanvasLayer"]
-offset_left = 894.0
-offset_top = 582.0
-offset_right = 1090.0
-offset_bottom = 613.0
+offset_left = 1265.0
+offset_top = 772.0
+offset_right = 1461.0
+offset_bottom = 803.0
 scale = Vector2(1.2, 1.2)
 text = "Press SPACE to interact"
 text_direction = 2
+
+[node name="Ingredient" type="Panel" parent="CanvasLayer"]
+offset_left = 17.0
+offset_top = 733.0
+offset_right = 57.0
+offset_bottom = 773.0
+scale = Vector2(5.82651, 1.62651)
+script = ExtResource("8_jugcl")
+
+[node name="IngredientsContainer" type="VBoxContainer" parent="CanvasLayer/Ingredient"]
+offset_left = 2.52051
+offset_top = 7.90039
+offset_right = 42.5205
+offset_bottom = 47.9004
+scale = Vector2(0.145493, 0.487622)
 
 [node name="CoinCuisine" parent="." instance=ExtResource("9_prx2b")]
 position = Vector2(721, 73)
