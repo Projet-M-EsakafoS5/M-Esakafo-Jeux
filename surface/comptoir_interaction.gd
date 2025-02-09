@@ -255,12 +255,6 @@ func commencer_cuisson():
 		var min_size = Vector2(30, 30)
 		sprite.scale = min_size / (sprite.texture.get_size()/2)
 		sprite.texture = load(plat_cuit.sprite)
-		
-		# Placer le plat sur le feu
-		#var feu_position = $Feu_1.global_position  # Récupérer la position du feu
-		#plat_cuit.global_position = feu_position
-
-		# Ajouter la scène au parent (la cuisine ou la map)
 		get_parent().add_child(plat_cuit)
 		
 		print("Plat cuit :", plat_selectionne["plat"]["nom"], " placé sur le feu !")
