@@ -29,10 +29,6 @@ scale = Vector2(1.29335, 1.29335)
 position = Vector2(380, 299)
 scale = Vector2(1.56, 1.56)
 
-[node name="Goblin" parent="." instance=ExtResource("3_eag20")]
-position = Vector2(578, 330)
-scale = Vector2(1.48, 1.48)
-
 [node name="Recette" parent="." instance=ExtResource("4_jh34w")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -49,3 +45,7 @@ offset_left = 1035.0
 offset_top = 26.0
 offset_right = 1075.0
 offset_bottom = 66.0
+
+[node name="Goblin" parent="." instance=ExtResource("3_eag20")]
+position = Vector2(578, 330)
+scale = Vector2(1.48, 1.48)

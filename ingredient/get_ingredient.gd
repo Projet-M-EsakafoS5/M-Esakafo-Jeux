@@ -2,7 +2,7 @@ extends Node
 
 var ingredient_recup = []  # Tableau pour stocker les ingrédients récupérés
 var request_sent = false  # Variable pour vérifier si la requête a déjà été envoyée
-
+@onready var goblin = get_node("/root/Main/Goblin")
 func _ready():
 	if request_sent:
 		return  # Si la requête a déjà été envoyée, on arrête la fonction
@@ -92,5 +92,7 @@ func spawn_food(ingredient, position_x, position_y):
 	
 	# Positionner l'ingrédient avec les coordonnées spécifiées
 	new_ingredient.position = Vector2(position_x, position_y)
+	new_ingredient.z_index = 0
+	goblin.z_index = 1
 
 	main_scene.add_child(new_ingredient)
