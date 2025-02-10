@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7e0mt6uo0o0a"
-path="res://.godot/imported/spaghetti.png-c3fd42a420429f9141e65a3944c7be0f.ctex"
+uid="uid://cpmk6ri4d4xer"
+path="res://.godot/imported/steak.png-c2ad226fdc2752933fb178c3d7d225fb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/plats/spaghetti.png"
-dest_files=["res://.godot/imported/spaghetti.png-c3fd42a420429f9141e65a3944c7be0f.ctex"]
+source_file="res://steak.png"
+dest_files=["res://.godot/imported/steak.png-c2ad226fdc2752933fb178c3d7d225fb.ctex"]
 
 [params]
 

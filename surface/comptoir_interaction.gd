@@ -77,7 +77,7 @@ func afficher_commandes(liste_commande):
 		var quantite = commande["quantite"]
 		var ticket = commande["numeroTicket"]
 		var statut = commande["statut"]
-		var sprite_path = "res://assets/plats/" + commande["plat"]["sprite"]  # Assure-toi que les images sont bien stockées
+		var sprite_path = "res://" + commande["plat"]["sprite"]  # Assure-toi que les images sont bien stockées
 		#print(commande["plat"]["nom"])
 		# Créer un nouveau conteneur pour afficher la commande
 		var commande_ui = HBoxContainer.new()
@@ -253,7 +253,7 @@ func commencer_cuisson():
 		var plat_cuit = load("res://plats/plat_finie.tscn").instantiate()
 		plat_cuit.position = Vector2(0, -30)
 		plat_cuit.id_plat = plat_selectionne["id"]  # Assigner l'ID du plat cuit
-		plat_cuit.sprite = "res://assets/plats/"+ plat_selectionne["plat"]["sprite"]
+		plat_cuit.sprite = "res://"+ plat_selectionne["plat"]["sprite"]
 		var sprite = plat_cuit.get_node("Ato")  # Accéder au Sprite2D
 		var min_size = Vector2(30, 30)
 		sprite.scale = min_size / (sprite.texture.get_size()/2)
