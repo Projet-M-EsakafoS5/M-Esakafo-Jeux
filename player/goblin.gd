@@ -93,7 +93,7 @@ func _on_area_entered(area: Area2D):
 			food_info = null  
 	else:
 		print("L'objet tenu n'est pas un plat valide !")
-		UI.text = "Livraison non disponible"
+		UI.text = "..."
 
 func _on_request_completed(result, response_code, headers, body):
 	if response_code == 200:
