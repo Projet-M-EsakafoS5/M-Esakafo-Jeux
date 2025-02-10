@@ -10,10 +10,12 @@ config_version=5
 
 [application]
 
-config/name="jeu de cuisine"
+config/name="M-esakafo"
+config/version="1.0"
 run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
-config/icon="res://icon.svg"
+boot_splash/image="res://assets/screen title.png"
+config/icon="res://assets/476721496_640760434999189_2723358284540717443_n.png"
 
 [autoload]
 

@@ -124,6 +124,7 @@ func selectionner_plat():
 
 	if plat_selectionne:
 		print("Un plat est déjà en cours de cuisson :", plat_selectionne["plat"]["nom"])
+		UI.text = "Un plat est déjà en cours de cuisson :"+ plat_selectionne["plat"]["nom"]
 		return
 
 	for plat in cuisson_manager.plats_a_preparer:
@@ -148,9 +149,9 @@ func selectionner_plat():
 			if ingredientrecette["plat"]["id"] == plat_selectionne["plat"]["id"]:
 				ingredient_plats.append(ingredientrecette)
 		cuisson_manager.plats_a_preparer.erase(plat_selectionne)  # Retirer le plat de la liste
+		afficher_commandes(cuisson_manager.plats_a_preparer)
 		print("Ingrédients nécessaires :", ingredient_plats)
 		return
-
 	print("Aucun plat disponible pour la cuisson.")
 
 # Lorsqu'un plat est sélectionné pour la cuisson
@@ -168,9 +169,10 @@ func _on_request_completed(_result, response_code, _headers, body):
 			for plat in data:
 				var id_plat = int(plat["plat"]["id"])
 				ajouter_plats_a_preparer(nouveaux_plats, plat)
-				#update_commande_status(plat["id"], 1)
+				update_commande_status(plat["id"], 1)
 				#http_request.request(API_URL)
 		afficher_commandes(cuisson_manager.plats_a_preparer)
+		
 func update_commande_status(plat_id, statut):
 	var url = "https://m-esakafo-1.onrender.com/api/commandes/%s/statut" % str(plat_id)  # Remplace le 1 par l'ID du plat
 	var http_request = HTTPRequest.new()
@@ -194,19 +196,20 @@ func ajouter_plats_a_preparer(nouveaux_plats, plat):
 	if cuisson_manager.est_plat_cuit(plat_id):
 		#print("Plat déjà cuit, ignoré :", plat.get("nom", ""))
 		return
+	
 
 	# Vérifie si le plat est déjà dans la liste avant de l'ajouter
-	for p in plat:
-		if not cuisson_manager.plats_a_preparer.has(plat):
-			cuisson_manager.ajouter_plat_a_preparer(plat)
-			nouveaux_plats.append(plat)
-			#update_commande_status(plat["id"], 1)
-	
+	if not cuisson_manager.plats_a_preparer.has(plat):
+		cuisson_manager.ajouter_plat_a_preparer(plat)
+		nouveaux_plats.append(plat)
+		update_commande_status(plat["id"], 1)
+		print("Ajout du plat :", plat["plat"]["nom"])
 		#else:
 			#print("Plat déjà présent, ignoré :", plat.get("nom", ""))
 
 	# Tri des nouveaux plats par ID
 	nouveaux_plats.sort_custom(func(a, b): return int(a["plat"]["id"]) < int(b["plat"]["id"]))
+	afficher_commandes(cuisson_manager.plats_a_preparer)
 
 
 # Vérifie si un ingrédient est ajouté au feu
@@ -261,6 +264,9 @@ func commencer_cuisson():
 		UI.text = "prete a etre livrée"
 		bouton_plat.queue_free()
 		# Réinitialisation des variables
+		
+		#cuisson_manager.plats_a_preparer.erase(plat_selectionne)
+		
 		plat_selectionne = null
 		temps_restant = 0
 		timer_cuisson = null
@@ -270,6 +276,7 @@ func commencer_cuisson():
 		for node in ingredients_container.get_children():
 			node.queue_free()
 		http_request.request(API_URL)
+		
 
 
 # Fonction désactivée mais conservée pour référence
